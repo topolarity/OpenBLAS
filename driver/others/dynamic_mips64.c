@@ -48,21 +48,15 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #ifdef DYNAMIC_LIST
-extern gotoblas_t  gotoblas_MIPS64_GENERIC;
 #ifdef DYN_LOONGSON3R3
-extern gotoblas_t  gotoblas_LOONGSON3R3;
 #else
-#define  gotoblas_LOONGSON3R3 gotoblas_MIPS64_GENERIC
+#define OPENBLAS_CORE_LOONGSON3R3 OPENBLAS_CORE_MIPS64_GENERIC
 #endif
 #ifdef DYN_LOONGSON3R4
-extern gotoblas_t  gotoblas_LOONGSON3R4;
 #else
-#define  gotoblas_LOONGSON3R4 gotoblas_MIPS64_GENERIC
+#define OPENBLAS_CORE_LOONGSON3R4 OPENBLAS_CORE_MIPS64_GENERIC
 #endif
 #else
-extern gotoblas_t  gotoblas_LOONGSON3R3;
-extern gotoblas_t  gotoblas_LOONGSON3R4;
-extern gotoblas_t  gotoblas_MIPS64_GENERIC;
 #endif
 
 extern void openblas_warning(int verbose, const char * msg);
@@ -77,13 +71,13 @@ static char *corename[] = {
 };
 
 char *gotoblas_corename(void) {
-  if (gotoblas == &gotoblas_MIPS64_GENERIC) return corename[0];
-  if (gotoblas == &gotoblas_LOONGSON3R3)    return corename[1];
-  if (gotoblas == &gotoblas_LOONGSON3R4)    return corename[2];
+  if (openblas_core == OPENBLAS_CORE_MIPS64_GENERIC) return corename[0];
+  if (openblas_core == OPENBLAS_CORE_LOONGSON3R3)    return corename[1];
+  if (openblas_core == OPENBLAS_CORE_LOONGSON3R4)    return corename[2];
   return corename[NUM_CORETYPES];
 }
 
-static gotoblas_t *force_coretype(char *coretype) {
+static int force_coretype(char *coretype) {
   int i;
   int found = -1;
   char message[128];
@@ -99,20 +93,20 @@ static gotoblas_t *force_coretype(char *coretype) {
 
   switch (found)
   {
-    case  0: return (&gotoblas_MIPS64_GENERIC);
-    case  1: return (&gotoblas_LOONGSON3R3);
-    case  2: return (&gotoblas_LOONGSON3R4);
+    case  0: return OPENBLAS_CORE_MIPS64_GENERIC;
+    case  1: return OPENBLAS_CORE_LOONGSON3R3;
+    case  2: return OPENBLAS_CORE_LOONGSON3R4;
   }
   snprintf(message, 128, "Core not found: %s\n", coretype);
   openblas_warning(1, message);
-  return NULL;
+  return -1;
 }
 
 #if (defined OS_LINUX || defined OS_ANDROID)
 #define MMI_MASK    0x00000010
 #define MSA_MASK    0x00000020
 
-static gotoblas_t *get_coretype_from_cpucfg(void) {
+static int get_coretype_from_cpucfg(void) {
     int flag = 0;
     __asm__ volatile(
         ".set push                 \n\t"
@@ -127,13 +121,13 @@ static gotoblas_t *get_coretype_from_cpucfg(void) {
         :
     );
     if (flag & MSA_MASK)
-        return (&gotoblas_LOONGSON3R4);
+        return OPENBLAS_CORE_LOONGSON3R4;
     if (flag & MMI_MASK)
-        return (&gotoblas_LOONGSON3R3);
-    return NULL;
+        return OPENBLAS_CORE_LOONGSON3R3;
+    return -1;
 }
 
-static gotoblas_t *get_coretype_from_cpuinfo(void) {
+static int get_coretype_from_cpuinfo(void) {
 #ifdef __linux
   FILE *infile;
   char buffer[512], *p;
@@ -150,20 +144,20 @@ static gotoblas_t *get_coretype_from_cpuinfo(void) {
   fclose(infile);
   if(p != NULL){
    if (strstr(p, "Loongson-3A3000") || strstr(p, "Loongson-3B3000"))
-     return (&gotoblas_LOONGSON3R3);
+     return OPENBLAS_CORE_LOONGSON3R3;
    else if(strstr(p, "Loongson-3A4000") || strstr(p, "Loongson-3B4000"))
-     return (&gotoblas_LOONGSON3R4);
+     return OPENBLAS_CORE_LOONGSON3R4;
    else
-     return NULL;
+     return -1;
   }
 #endif
-  return NULL;
+  return -1;
 }
 #endif
 
-static gotoblas_t *get_coretype(void) {
+static int get_coretype(void) {
 #if (!defined OS_LINUX && !defined OS_ANDROID)
-  return NULL;
+  return -1;
 #else
   if (!(getauxval(AT_HWCAP) & HWCAP_LOONGSON_CPUCFG))
     return get_coretype_from_cpucfg();
@@ -177,30 +171,30 @@ void gotoblas_dynamic_init(void) {
   char coren[22];
   char *p;
 
-  if (gotoblas) return;
+  if (openblas_core >= 0) return;
 
   p = getenv("OPENBLAS_CORETYPE");
   if ( p )
   {
-    gotoblas = force_coretype(p);
+    openblas_core = force_coretype(p);
   }
   else
   {
-    gotoblas = get_coretype();
+    openblas_core = get_coretype();
   }
 
-  if (gotoblas == NULL)
+  if (openblas_core < 0)
   {
     snprintf(coremsg, 128, "Falling back to MIPS64_GENEIRC\n");
     openblas_warning(1, coremsg);
-    gotoblas = &gotoblas_MIPS64_GENERIC;
+    openblas_core = OPENBLAS_CORE_MIPS64_GENERIC;
   }
 
-  if (gotoblas && gotoblas->init) {
+  if (openblas_core >= 0 && openblas_params_tab[openblas_core]->init) {
     strncpy(coren, gotoblas_corename(), 20);
     sprintf(coremsg, "Core: %s\n", coren);
     openblas_warning(2, coremsg);
-    gotoblas -> init();
+    openblas_params_tab[openblas_core]->init();
   } else {
     openblas_warning(0, "OpenBLAS : Architecture Initialization failed. No initialization function found.\n");
     exit(1);
@@ -209,5 +203,5 @@ void gotoblas_dynamic_init(void) {
 }
 
 void gotoblas_dynamic_quit(void) {
-  gotoblas = NULL;
+  openblas_core = -1;
 }

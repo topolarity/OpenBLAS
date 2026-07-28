@@ -212,46 +212,42 @@
 
 #else
 
-#define	XAMAX_K			gotoblas -> xamax_k
-#define	XAMIN_K			gotoblas -> xamin_k
-#define	XMAX_K			gotoblas -> xmax_k
-#define	XMIN_K			gotoblas -> xmin_k
-#define	IXAMAX_K		gotoblas -> ixamax_k
-#define	IXAMIN_K		gotoblas -> ixamin_k
-#define	IXMAX_K			gotoblas -> ixmax_k
-#define	IXMIN_K			gotoblas -> ixmin_k
-#define	XASUM_K			gotoblas -> xasum_k
-#define	XAXPYU_K		gotoblas -> xaxpy_k
-#define	XAXPYC_K		gotoblas -> xaxpyc_k
-#define	XCOPY_K			gotoblas -> xcopy_k
-#define	XDOTU_K			gotoblas -> xdotu_k
-#define	XDOTC_K			gotoblas -> xdotc_k
-#define	XNRM2_K			gotoblas -> xnrm2_k
-#define	XSCAL_K			gotoblas -> xscal_k
-#define	XSUM_K			gotoblas -> xsum_k
-#define	XSWAP_K			gotoblas -> xswap_k
-#define	XROT_K			gotoblas -> xqrot_k
+#define	XAMAX_K			openblas_xamax_dispatch[openblas_core]->xamax_k
+#define	XAMIN_K			openblas_xamin_dispatch[openblas_core]->xamin_k
+#define	IXAMAX_K		openblas_ixamax_dispatch[openblas_core]->ixamax_k
+#define	IXAMIN_K		openblas_ixamin_dispatch[openblas_core]->ixamin_k
+#define	XASUM_K			openblas_xasum_dispatch[openblas_core]->xasum_k
+#define	XAXPYU_K		openblas_xaxpy_dispatch[openblas_core]->xaxpy_k
+#define	XAXPYC_K		openblas_xaxpyc_dispatch[openblas_core]->xaxpyc_k
+#define	XCOPY_K			openblas_xcopy_dispatch[openblas_core]->xcopy_k
+#define	XDOTU_K			openblas_xdotu_dispatch[openblas_core]->xdotu_k
+#define	XDOTC_K			openblas_xdotc_dispatch[openblas_core]->xdotc_k
+#define	XNRM2_K			openblas_xnrm2_dispatch[openblas_core]->xnrm2_k
+#define	XSCAL_K			openblas_xscal_dispatch[openblas_core]->xscal_k
+#define	XSUM_K			openblas_xsum_dispatch[openblas_core]->xsum_k
+#define	XSWAP_K			openblas_xswap_dispatch[openblas_core]->xswap_k
+#define	XROT_K			openblas_xqrot_dispatch[openblas_core]->xqrot_k
 
-#define	XGEMV_N			gotoblas -> xgemv_n
-#define	XGEMV_T			gotoblas -> xgemv_t
-#define	XGEMV_R			gotoblas -> xgemv_r
-#define	XGEMV_C			gotoblas -> xgemv_c
-#define	XGEMV_O			gotoblas -> xgemv_o
-#define	XGEMV_U			gotoblas -> xgemv_u
-#define	XGEMV_S			gotoblas -> xgemv_s
-#define	XGEMV_D			gotoblas -> xgemv_d
+#define	XGEMV_N			openblas_xgemv_dispatch[openblas_core]->xgemv_n
+#define	XGEMV_T			openblas_xgemv_dispatch[openblas_core]->xgemv_t
+#define	XGEMV_R			openblas_xgemv_dispatch[openblas_core]->xgemv_r
+#define	XGEMV_C			openblas_xgemv_dispatch[openblas_core]->xgemv_c
+#define	XGEMV_O			openblas_xgemv_dispatch[openblas_core]->xgemv_o
+#define	XGEMV_U			openblas_xgemv_dispatch[openblas_core]->xgemv_u
+#define	XGEMV_S			openblas_xgemv_dispatch[openblas_core]->xgemv_s
+#define	XGEMV_D			openblas_xgemv_dispatch[openblas_core]->xgemv_d
 
-#define	XGERU_K			gotoblas -> xgeru_k
-#define	XGERC_K			gotoblas -> xgerc_k
-#define	XGERV_K			gotoblas -> xgerv_k
-#define	XGERD_K			gotoblas -> xgerd_k
+#define	XGERU_K			openblas_xgeru_dispatch[openblas_core]->xgeru_k
+#define	XGERC_K			openblas_xgerc_dispatch[openblas_core]->xgerc_k
+#define	XGERV_K			openblas_xgerv_dispatch[openblas_core]->xgerv_k
+#define	XGERD_K			openblas_xgerd_dispatch[openblas_core]->xgerd_k
 
-#define XSYMV_U			gotoblas -> xsymv_U
-#define XSYMV_L			gotoblas -> xsymv_L
-#define XHEMV_U			gotoblas -> xhemv_U
-#define XHEMV_L			gotoblas -> xhemv_L
-#define XHEMV_V			gotoblas -> xhemv_V
-#define XHEMV_M			gotoblas -> xhemv_M
+#define XSYMV_U			openblas_xsymv_dispatch[openblas_core]->xsymv_U
+#define XSYMV_L			openblas_xsymv_dispatch[openblas_core]->xsymv_L
+#define XHEMV_U			openblas_xhemv_dispatch[openblas_core]->xhemv_U
+#define XHEMV_L			openblas_xhemv_dispatch[openblas_core]->xhemv_L
+#define XHEMV_V			openblas_xhemv_dispatch[openblas_core]->xhemv_V
+#define XHEMV_M			openblas_xhemv_dispatch[openblas_core]->xhemv_M
 
 #define XSYMV_THREAD_U		xsymv_thread_U
 #define XSYMV_THREAD_L		xsymv_thread_L
@@ -260,127 +256,127 @@
 #define XHEMV_THREAD_V		xhemv_thread_V
 #define XHEMV_THREAD_M		xhemv_thread_M
 
-#define	XGEMM_ONCOPY		gotoblas -> xgemm_oncopy
-#define	XGEMM_OTCOPY		gotoblas -> xgemm_otcopy
-#define	XGEMM_INCOPY		gotoblas -> xgemm_incopy
-#define	XGEMM_ITCOPY		gotoblas -> xgemm_itcopy
+#define	XGEMM_ONCOPY		openblas_xgemm_dispatch[openblas_core]->xgemm_oncopy
+#define	XGEMM_OTCOPY		openblas_xgemm_dispatch[openblas_core]->xgemm_otcopy
+#define	XGEMM_INCOPY		openblas_xgemm_dispatch[openblas_core]->xgemm_incopy
+#define	XGEMM_ITCOPY		openblas_xgemm_dispatch[openblas_core]->xgemm_itcopy
 
-#define	XTRMM_OUNUCOPY		gotoblas -> xtrmm_ounucopy
-#define	XTRMM_OUTUCOPY		gotoblas -> xtrmm_outucopy
-#define	XTRMM_OLNUCOPY		gotoblas -> xtrmm_olnucopy
-#define	XTRMM_OLTUCOPY		gotoblas -> xtrmm_oltucopy
-#define	XTRSM_OUNUCOPY		gotoblas -> xtrsm_ounucopy
-#define	XTRSM_OUTUCOPY		gotoblas -> xtrsm_outucopy
-#define	XTRSM_OLNUCOPY		gotoblas -> xtrsm_olnucopy
-#define	XTRSM_OLTUCOPY		gotoblas -> xtrsm_oltucopy
+#define	XTRMM_OUNUCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_ounucopy
+#define	XTRMM_OUTUCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_outucopy
+#define	XTRMM_OLNUCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_olnucopy
+#define	XTRMM_OLTUCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_oltucopy
+#define	XTRSM_OUNUCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_ounucopy
+#define	XTRSM_OUTUCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_outucopy
+#define	XTRSM_OLNUCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_olnucopy
+#define	XTRSM_OLTUCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_oltucopy
 
-#define	XTRMM_IUNUCOPY		gotoblas -> xtrmm_iunucopy
-#define	XTRMM_IUTUCOPY		gotoblas -> xtrmm_iutucopy
-#define	XTRMM_ILNUCOPY		gotoblas -> xtrmm_ilnucopy
-#define	XTRMM_ILTUCOPY		gotoblas -> xtrmm_iltucopy
-#define	XTRSM_IUNUCOPY		gotoblas -> xtrsm_iunucopy
-#define	XTRSM_IUTUCOPY		gotoblas -> xtrsm_iutucopy
-#define	XTRSM_ILNUCOPY		gotoblas -> xtrsm_ilnucopy
-#define	XTRSM_ILTUCOPY		gotoblas -> xtrsm_iltucopy
+#define	XTRMM_IUNUCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_iunucopy
+#define	XTRMM_IUTUCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_iutucopy
+#define	XTRMM_ILNUCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_ilnucopy
+#define	XTRMM_ILTUCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_iltucopy
+#define	XTRSM_IUNUCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_iunucopy
+#define	XTRSM_IUTUCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_iutucopy
+#define	XTRSM_ILNUCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_ilnucopy
+#define	XTRSM_ILTUCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_iltucopy
 
-#define	XTRMM_OUNNCOPY		gotoblas -> xtrmm_ounncopy
-#define	XTRMM_OUTNCOPY		gotoblas -> xtrmm_outncopy
-#define	XTRMM_OLNNCOPY		gotoblas -> xtrmm_olnncopy
-#define	XTRMM_OLTNCOPY		gotoblas -> xtrmm_oltncopy
-#define	XTRSM_OUNNCOPY		gotoblas -> xtrsm_ounncopy
-#define	XTRSM_OUTNCOPY		gotoblas -> xtrsm_outncopy
-#define	XTRSM_OLNNCOPY		gotoblas -> xtrsm_olnncopy
-#define	XTRSM_OLTNCOPY		gotoblas -> xtrsm_oltncopy
+#define	XTRMM_OUNNCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_ounncopy
+#define	XTRMM_OUTNCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_outncopy
+#define	XTRMM_OLNNCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_olnncopy
+#define	XTRMM_OLTNCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_oltncopy
+#define	XTRSM_OUNNCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_ounncopy
+#define	XTRSM_OUTNCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_outncopy
+#define	XTRSM_OLNNCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_olnncopy
+#define	XTRSM_OLTNCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_oltncopy
 
-#define	XTRMM_IUNNCOPY		gotoblas -> xtrmm_iunncopy
-#define	XTRMM_IUTNCOPY		gotoblas -> xtrmm_iutncopy
-#define	XTRMM_ILNNCOPY		gotoblas -> xtrmm_ilnncopy
-#define	XTRMM_ILTNCOPY		gotoblas -> xtrmm_iltncopy
-#define	XTRSM_IUNNCOPY		gotoblas -> xtrsm_iunncopy
-#define	XTRSM_IUTNCOPY		gotoblas -> xtrsm_iutncopy
-#define	XTRSM_ILNNCOPY		gotoblas -> xtrsm_ilnncopy
-#define	XTRSM_ILTNCOPY		gotoblas -> xtrsm_iltncopy
+#define	XTRMM_IUNNCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_iunncopy
+#define	XTRMM_IUTNCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_iutncopy
+#define	XTRMM_ILNNCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_ilnncopy
+#define	XTRMM_ILTNCOPY		openblas_xtrmm_dispatch[openblas_core]->xtrmm_iltncopy
+#define	XTRSM_IUNNCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_iunncopy
+#define	XTRSM_IUTNCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_iutncopy
+#define	XTRSM_ILNNCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_ilnncopy
+#define	XTRSM_ILTNCOPY		openblas_xtrsm_dispatch[openblas_core]->xtrsm_iltncopy
 
-#define	XGEMM_BETA		gotoblas -> xgemm_beta
-#define	XGEMM_KERNEL_N		gotoblas -> xgemm_kernel_n
-#define	XGEMM_KERNEL_L		gotoblas -> xgemm_kernel_l
-#define	XGEMM_KERNEL_R		gotoblas -> xgemm_kernel_r
-#define	XGEMM_KERNEL_B		gotoblas -> xgemm_kernel_b
+#define	XGEMM_BETA		openblas_xgemm_dispatch[openblas_core]->xgemm_beta
+#define	XGEMM_KERNEL_N		openblas_xgemm_dispatch[openblas_core]->xgemm_kernel_n
+#define	XGEMM_KERNEL_L		openblas_xgemm_dispatch[openblas_core]->xgemm_kernel_l
+#define	XGEMM_KERNEL_R		openblas_xgemm_dispatch[openblas_core]->xgemm_kernel_r
+#define	XGEMM_KERNEL_B		openblas_xgemm_dispatch[openblas_core]->xgemm_kernel_b
 
-#define	XTRMM_KERNEL_LN		gotoblas -> xtrmm_kernel_LN
-#define	XTRMM_KERNEL_LT		gotoblas -> xtrmm_kernel_LT
-#define	XTRMM_KERNEL_LR		gotoblas -> xtrmm_kernel_LR
-#define	XTRMM_KERNEL_LC		gotoblas -> xtrmm_kernel_LC
-#define	XTRMM_KERNEL_RN		gotoblas -> xtrmm_kernel_RN
-#define	XTRMM_KERNEL_RT		gotoblas -> xtrmm_kernel_RT
-#define	XTRMM_KERNEL_RR		gotoblas -> xtrmm_kernel_RR
-#define	XTRMM_KERNEL_RC		gotoblas -> xtrmm_kernel_RC
+#define	XTRMM_KERNEL_LN		openblas_xtrmm_dispatch[openblas_core]->xtrmm_kernel_LN
+#define	XTRMM_KERNEL_LT		openblas_xtrmm_dispatch[openblas_core]->xtrmm_kernel_LT
+#define	XTRMM_KERNEL_LR		openblas_xtrmm_dispatch[openblas_core]->xtrmm_kernel_LR
+#define	XTRMM_KERNEL_LC		openblas_xtrmm_dispatch[openblas_core]->xtrmm_kernel_LC
+#define	XTRMM_KERNEL_RN		openblas_xtrmm_dispatch[openblas_core]->xtrmm_kernel_RN
+#define	XTRMM_KERNEL_RT		openblas_xtrmm_dispatch[openblas_core]->xtrmm_kernel_RT
+#define	XTRMM_KERNEL_RR		openblas_xtrmm_dispatch[openblas_core]->xtrmm_kernel_RR
+#define	XTRMM_KERNEL_RC		openblas_xtrmm_dispatch[openblas_core]->xtrmm_kernel_RC
 
-#define	XTRSM_KERNEL_LN		gotoblas -> xtrsm_kernel_LN
-#define	XTRSM_KERNEL_LT		gotoblas -> xtrsm_kernel_LT
-#define	XTRSM_KERNEL_LR		gotoblas -> xtrsm_kernel_LR
-#define	XTRSM_KERNEL_LC		gotoblas -> xtrsm_kernel_LC
-#define	XTRSM_KERNEL_RN		gotoblas -> xtrsm_kernel_RN
-#define	XTRSM_KERNEL_RT		gotoblas -> xtrsm_kernel_RT
-#define	XTRSM_KERNEL_RR		gotoblas -> xtrsm_kernel_RR
-#define	XTRSM_KERNEL_RC		gotoblas -> xtrsm_kernel_RC
+#define	XTRSM_KERNEL_LN		openblas_xtrsm_dispatch[openblas_core]->xtrsm_kernel_LN
+#define	XTRSM_KERNEL_LT		openblas_xtrsm_dispatch[openblas_core]->xtrsm_kernel_LT
+#define	XTRSM_KERNEL_LR		openblas_xtrsm_dispatch[openblas_core]->xtrsm_kernel_LR
+#define	XTRSM_KERNEL_LC		openblas_xtrsm_dispatch[openblas_core]->xtrsm_kernel_LC
+#define	XTRSM_KERNEL_RN		openblas_xtrsm_dispatch[openblas_core]->xtrsm_kernel_RN
+#define	XTRSM_KERNEL_RT		openblas_xtrsm_dispatch[openblas_core]->xtrsm_kernel_RT
+#define	XTRSM_KERNEL_RR		openblas_xtrsm_dispatch[openblas_core]->xtrsm_kernel_RR
+#define	XTRSM_KERNEL_RC		openblas_xtrsm_dispatch[openblas_core]->xtrsm_kernel_RC
 
-#define	XSYMM_IUTCOPY		gotoblas -> xsymm_iutcopy
-#define	XSYMM_ILTCOPY		gotoblas -> xsymm_iltcopy
-#define	XSYMM_OUTCOPY		gotoblas -> xsymm_outcopy
-#define	XSYMM_OLTCOPY		gotoblas -> xsymm_oltcopy
+#define	XSYMM_IUTCOPY		openblas_xsymm_dispatch[openblas_core]->xsymm_iutcopy
+#define	XSYMM_ILTCOPY		openblas_xsymm_dispatch[openblas_core]->xsymm_iltcopy
+#define	XSYMM_OUTCOPY		openblas_xsymm_dispatch[openblas_core]->xsymm_outcopy
+#define	XSYMM_OLTCOPY		openblas_xsymm_dispatch[openblas_core]->xsymm_oltcopy
 
-#define	XHEMM_OUTCOPY		gotoblas -> xhemm_outcopy
-#define	XHEMM_OLTCOPY		gotoblas -> xhemm_oltcopy
-#define	XHEMM_IUTCOPY		gotoblas -> xhemm_iutcopy
-#define	XHEMM_ILTCOPY		gotoblas -> xhemm_iltcopy
+#define	XHEMM_OUTCOPY		openblas_xhemm_dispatch[openblas_core]->xhemm_outcopy
+#define	XHEMM_OLTCOPY		openblas_xhemm_dispatch[openblas_core]->xhemm_oltcopy
+#define	XHEMM_IUTCOPY		openblas_xhemm_dispatch[openblas_core]->xhemm_iutcopy
+#define	XHEMM_ILTCOPY		openblas_xhemm_dispatch[openblas_core]->xhemm_iltcopy
 
-#define	XGEMM3M_ONCOPYB		gotoblas -> xgemm3m_oncopyb
-#define	XGEMM3M_ONCOPYR		gotoblas -> xgemm3m_oncopyr
-#define	XGEMM3M_ONCOPYI		gotoblas -> xgemm3m_oncopyi
-#define	XGEMM3M_OTCOPYB		gotoblas -> xgemm3m_otcopyb
-#define	XGEMM3M_OTCOPYR		gotoblas -> xgemm3m_otcopyr
-#define	XGEMM3M_OTCOPYI		gotoblas -> xgemm3m_otcopyi
+#define	XGEMM3M_ONCOPYB		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_oncopyb
+#define	XGEMM3M_ONCOPYR		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_oncopyr
+#define	XGEMM3M_ONCOPYI		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_oncopyi
+#define	XGEMM3M_OTCOPYB		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_otcopyb
+#define	XGEMM3M_OTCOPYR		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_otcopyr
+#define	XGEMM3M_OTCOPYI		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_otcopyi
 
-#define	XGEMM3M_INCOPYB		gotoblas -> xgemm3m_incopyb
-#define	XGEMM3M_INCOPYR		gotoblas -> xgemm3m_incopyr
-#define	XGEMM3M_INCOPYI		gotoblas -> xgemm3m_incopyi
-#define	XGEMM3M_ITCOPYB		gotoblas -> xgemm3m_itcopyb
-#define	XGEMM3M_ITCOPYR		gotoblas -> xgemm3m_itcopyr
-#define	XGEMM3M_ITCOPYI		gotoblas -> xgemm3m_itcopyi
+#define	XGEMM3M_INCOPYB		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_incopyb
+#define	XGEMM3M_INCOPYR		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_incopyr
+#define	XGEMM3M_INCOPYI		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_incopyi
+#define	XGEMM3M_ITCOPYB		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_itcopyb
+#define	XGEMM3M_ITCOPYR		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_itcopyr
+#define	XGEMM3M_ITCOPYI		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_itcopyi
 
-#define	XSYMM3M_ILCOPYB		gotoblas -> xsymm3m_ilcopyb
-#define	XSYMM3M_IUCOPYB		gotoblas -> xsymm3m_iucopyb
-#define	XSYMM3M_ILCOPYR		gotoblas -> xsymm3m_ilcopyr
-#define	XSYMM3M_IUCOPYR		gotoblas -> xsymm3m_iucopyr
-#define	XSYMM3M_ILCOPYI		gotoblas -> xsymm3m_ilcopyi
-#define	XSYMM3M_IUCOPYI		gotoblas -> xsymm3m_iucopyi
+#define	XSYMM3M_ILCOPYB		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_ilcopyb
+#define	XSYMM3M_IUCOPYB		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_iucopyb
+#define	XSYMM3M_ILCOPYR		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_ilcopyr
+#define	XSYMM3M_IUCOPYR		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_iucopyr
+#define	XSYMM3M_ILCOPYI		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_ilcopyi
+#define	XSYMM3M_IUCOPYI		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_iucopyi
 
-#define	XSYMM3M_OLCOPYB		gotoblas -> xsymm3m_olcopyb
-#define	XSYMM3M_OUCOPYB		gotoblas -> xsymm3m_oucopyb
-#define	XSYMM3M_OLCOPYR		gotoblas -> xsymm3m_olcopyr
-#define	XSYMM3M_OUCOPYR		gotoblas -> xsymm3m_oucopyr
-#define	XSYMM3M_OLCOPYI		gotoblas -> xsymm3m_olcopyi
-#define	XSYMM3M_OUCOPYI		gotoblas -> xsymm3m_oucopyi
+#define	XSYMM3M_OLCOPYB		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_olcopyb
+#define	XSYMM3M_OUCOPYB		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_oucopyb
+#define	XSYMM3M_OLCOPYR		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_olcopyr
+#define	XSYMM3M_OUCOPYR		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_oucopyr
+#define	XSYMM3M_OLCOPYI		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_olcopyi
+#define	XSYMM3M_OUCOPYI		openblas_xsymm3m_dispatch[openblas_core]->xsymm3m_oucopyi
 
-#define	XHEMM3M_ILCOPYB		gotoblas -> xhemm3m_ilcopyb
-#define	XHEMM3M_IUCOPYB		gotoblas -> xhemm3m_iucopyb
-#define	XHEMM3M_ILCOPYR		gotoblas -> xhemm3m_ilcopyr
-#define	XHEMM3M_IUCOPYR		gotoblas -> xhemm3m_iucopyr
-#define	XHEMM3M_ILCOPYI		gotoblas -> xhemm3m_ilcopyi
-#define	XHEMM3M_IUCOPYI		gotoblas -> xhemm3m_iucopyi
+#define	XHEMM3M_ILCOPYB		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_ilcopyb
+#define	XHEMM3M_IUCOPYB		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_iucopyb
+#define	XHEMM3M_ILCOPYR		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_ilcopyr
+#define	XHEMM3M_IUCOPYR		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_iucopyr
+#define	XHEMM3M_ILCOPYI		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_ilcopyi
+#define	XHEMM3M_IUCOPYI		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_iucopyi
 
-#define	XHEMM3M_OLCOPYB		gotoblas -> xhemm3m_olcopyb
-#define	XHEMM3M_OUCOPYB		gotoblas -> xhemm3m_oucopyb
-#define	XHEMM3M_OLCOPYR		gotoblas -> xhemm3m_olcopyr
-#define	XHEMM3M_OUCOPYR		gotoblas -> xhemm3m_oucopyr
-#define	XHEMM3M_OLCOPYI		gotoblas -> xhemm3m_olcopyi
-#define	XHEMM3M_OUCOPYI		gotoblas -> xhemm3m_oucopyi
+#define	XHEMM3M_OLCOPYB		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_olcopyb
+#define	XHEMM3M_OUCOPYB		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_oucopyb
+#define	XHEMM3M_OLCOPYR		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_olcopyr
+#define	XHEMM3M_OUCOPYR		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_oucopyr
+#define	XHEMM3M_OLCOPYI		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_olcopyi
+#define	XHEMM3M_OUCOPYI		openblas_xhemm3m_dispatch[openblas_core]->xhemm3m_oucopyi
 
-#define	XGEMM3M_KERNEL		gotoblas -> xgemm3m_kernel
+#define	XGEMM3M_KERNEL		openblas_xgemm3m_dispatch[openblas_core]->xgemm3m_kernel
 
-#define XNEG_TCOPY		gotoblas -> xneg_tcopy
-#define XLASWP_NCOPY		gotoblas -> xlaswp_ncopy
+#define XNEG_TCOPY		openblas_xneg_dispatch[openblas_core]->xneg_tcopy
+#define XLASWP_NCOPY		openblas_xlaswp_dispatch[openblas_core]->xlaswp_ncopy
 
 #endif
 

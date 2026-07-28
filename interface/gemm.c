@@ -128,7 +128,7 @@ static int (*gemm[])(blas_arg_t *, BLASLONG *, BLASLONG *, IFLOAT *, IFLOAT *, B
 #ifndef DYNAMIC_ARCH
 #define SMALL_KERNEL_ADDR(table, idx) ((void *)(table[idx]))
 #else
-#define SMALL_KERNEL_ADDR(table, idx) ((void *)(*(uintptr_t *)((char *)gotoblas + (size_t)(table[idx]))))
+#define SMALL_KERNEL_ADDR(table, idx) ((void *)(*(uintptr_t *)(GEMM_SMALL_KERNEL_BASE + (size_t)(table[idx]))))
 #endif
 
 
@@ -581,7 +581,7 @@ else
 
 #if defined(__linux__) && defined(__x86_64__) && defined(BFLOAT16)
 #if defined(DYNAMIC_ARCH)
-  if (gotoblas->need_amxtile_permission &&
+  if (openblas_params_tab[openblas_core]->need_amxtile_permission &&
       openblas_amxtile_permission == 0 && init_amxtile_permission() == -1) {
     return;
   }

@@ -50,257 +50,214 @@
 #endif
 
 #ifdef DYNAMIC_LIST
-extern gotoblas_t gotoblas_PRESCOTT;
 
 #ifdef DYN_ATHLON
-extern gotoblas_t gotoblas_ATHLON;
 #else
-#define gotoblas_ATHLON gotoblas_PRESCOTT
+#define OPENBLAS_CORE_ATHLON OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_KATMAI
-extern gotoblas_t gotoblas_KATMAI;
 #else
-#define gotoblas_KATMAI gotoblas_PRESCOTT
+#define OPENBLAS_CORE_KATMAI OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_BANIAS
-extern gotoblas_t gotoblas_BANIAS;
 #else
-#define gotoblas_BANIAS gotoblas_PRESCOTT
+#define OPENBLAS_CORE_BANIAS OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_COPPERMINE
-extern gotoblas_t gotoblas_COPPERMINE;
 #else
-#define gotoblas_COPPERMINE gotoblas_PRESCOTT
+#define OPENBLAS_CORE_COPPERMINE OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_NORTHWOOD
-extern gotoblas_t gotoblas_NORTHWOOD;
 #else
-#define gotoblas_NORTHWOOD gotoblas_PRESCOTT
+#define OPENBLAS_CORE_NORTHWOOD OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_CORE2
-extern gotoblas_t gotoblas_CORE2;
 #else
-#define gotoblas_CORE2 gotoblas_PRESCOTT
+#define OPENBLAS_CORE_CORE2 OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_NEHALEM
-extern gotoblas_t gotoblas_NEHALEM;
 #else
-#define gotoblas_NEHALEM gotoblas_PRESCOTT
+#define OPENBLAS_CORE_NEHALEM OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_BARCELONA
-extern gotoblas_t gotoblas_BARCELONA;
 #elif defined(DYN_NEHALEM)
-#define gotoblas_BARCELONA gotoblas_NEHALEM
+#define OPENBLAS_CORE_BARCELONA OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_BARCELONA gotoblas_PRESCOTT
+#define OPENBLAS_CORE_BARCELONA OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_ATOM
-extern gotoblas_t gotoblas_ATOM;
 #elif defined(DYN_NEHALEM)
-#define gotoblas_ATOM gotoblas_NEHALEM
+#define OPENBLAS_CORE_ATOM OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_ATOM gotoblas_PRESCOTT
+#define OPENBLAS_CORE_ATOM OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_NANO
-extern gotoblas_t gotoblas_NANO;
 #else
-#define gotoblas_NANO gotoblas_PRESCOTT
+#define OPENBLAS_CORE_NANO OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_PENRYN
-extern gotoblas_t gotoblas_PENRYN;
 #else
-#define gotoblas_PENRYN gotoblas_PRESCOTT
+#define OPENBLAS_CORE_PENRYN OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_DUNNINGTON
-extern gotoblas_t gotoblas_DUNNINGTON;
 #else
-#define gotoblas_DUNNINGTON gotoblas_PRESCOTT
+#define OPENBLAS_CORE_DUNNINGTON OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_OPTERON
-extern gotoblas_t gotoblas_OPTERON;
 #else
-#define gotoblas_OPTERON gotoblas_PRESCOTT
+#define OPENBLAS_CORE_OPTERON OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_OPTERON_SSE3
-extern gotoblas_t gotoblas_OPTERON_SSE3;
 #else
-#define gotoblas_OPTERON_SSE3 gotoblas_PRESCOTT
+#define OPENBLAS_CORE_OPTERON_SSE3 OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_BOBCAT
-extern gotoblas_t gotoblas_BOBCAT;
 #elif defined(DYN_NEHALEM)
-#define gotoblas_BOBCAT gotoblas_NEHALEM
+#define OPENBLAS_CORE_BOBCAT OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_BOBCAT gotoblas_PRESCOTT
+#define OPENBLAS_CORE_BOBCAT OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_SANDYBRIDGE
-extern gotoblas_t gotoblas_SANDYBRIDGE;
 #elif defined(DYN_NEHALEM)
-#define gotoblas_SANDYBRIDGE gotoblas_NEHALEM
+#define OPENBLAS_CORE_SANDYBRIDGE OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_SANDYBRIDGE gotoblas_PRESCOTT
+#define OPENBLAS_CORE_SANDYBRIDGE OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_BULLDOZER
-extern gotoblas_t gotoblas_BULLDOZER;
 #elif defined(DYN_SANDYBRIDGE)
-#define gotoblas_BULLDOZER gotoblas_SANDYBRIDGE
+#define OPENBLAS_CORE_BULLDOZER OPENBLAS_CORE_SANDYBRIDGE
 #elif defined(DYN_NEHALEM)
-#define gotoblas_BULLDOZER gotoblas_NEHALEM
+#define OPENBLAS_CORE_BULLDOZER OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_BULLDOZER gotoblas_PRESCOTT
+#define OPENBLAS_CORE_BULLDOZER OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_PILEDRIVER
-extern gotoblas_t gotoblas_PILEDRIVER;
 #elif defined(DYN_SANDYBRIDGE)
-#define gotoblas_PILEDRIVER gotoblas_SANDYBRIDGE
+#define OPENBLAS_CORE_PILEDRIVER OPENBLAS_CORE_SANDYBRIDGE
 #elif defined(DYN_NEHALEM)
-#define gotoblas_PILEDRIVER gotoblas_NEHALEM
+#define OPENBLAS_CORE_PILEDRIVER OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_PILEDRIVER gotoblas_PRESCOTT
+#define OPENBLAS_CORE_PILEDRIVER OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_STEAMROLLER
-extern gotoblas_t gotoblas_STEAMROLLER;
 #elif defined(DYN_SANDYBRIDGE)
-#define gotoblas_STEAMROLLER gotoblas_SANDYBRIDGE
+#define OPENBLAS_CORE_STEAMROLLER OPENBLAS_CORE_SANDYBRIDGE
 #elif defined(DYN_NEHALEM)
-#define gotoblas_STEAMROLLER gotoblas_NEHALEM
+#define OPENBLAS_CORE_STEAMROLLER OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_STEAMROLLER gotoblas_PRESCOTT
+#define OPENBLAS_CORE_STEAMROLLER OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_EXCAVATOR
-extern gotoblas_t gotoblas_EXCAVATOR;
 #elif defined(DYN_SANDYBRIDGE)
-#define gotoblas_EXCAVATOR gotoblas_SANDYBRIDGE
+#define OPENBLAS_CORE_EXCAVATOR OPENBLAS_CORE_SANDYBRIDGE
 #elif defined(DYN_NEHALEM)
-#define gotoblas_EXCAVATOR gotoblas_NEHALEM
+#define OPENBLAS_CORE_EXCAVATOR OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_EXCAVATOR gotoblas_PRESCOTT
+#define OPENBLAS_CORE_EXCAVATOR OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_HASWELL
-extern gotoblas_t gotoblas_HASWELL;
 #elif defined(DYN_SANDYBRIDGE)
-#define gotoblas_HASWELL gotoblas_SANDYBRIDGE
+#define OPENBLAS_CORE_HASWELL OPENBLAS_CORE_SANDYBRIDGE
 #elif defined(DYN_NEHALEM)
-#define gotoblas_HASWELL gotoblas_NEHALEM
+#define OPENBLAS_CORE_HASWELL OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_HASWELL gotoblas_PRESCOTT
+#define OPENBLAS_CORE_HASWELL OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_ZEN
-extern gotoblas_t gotoblas_ZEN;
 #elif defined(DYN_HASWELL)
-#define gotoblas_ZEN gotoblas_HASWELL
+#define OPENBLAS_CORE_ZEN OPENBLAS_CORE_HASWELL
 #elif defined(DYN_SANDYBRIDGE)
-#define gotoblas_ZEN gotoblas_SANDYBRIDGE
+#define OPENBLAS_CORE_ZEN OPENBLAS_CORE_SANDYBRIDGE
 #elif defined(DYN_NEHALEM)
-#define gotoblas_ZEN gotoblas_NEHALEM
+#define OPENBLAS_CORE_ZEN OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_ZEN gotoblas_PRESCOTT
+#define OPENBLAS_CORE_ZEN OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_SKYLAKEX
-extern gotoblas_t gotoblas_SKYLAKEX;
 #elif defined(DYN_HASWELL)
-#define gotoblas_SKYLAKEX gotoblas_HASWELL
+#define OPENBLAS_CORE_SKYLAKEX OPENBLAS_CORE_HASWELL
 #elif defined(DYN_SANDYBRIDGE)
-#define gotoblas_SKYLAKEX gotoblas_SANDYBRIDGE
+#define OPENBLAS_CORE_SKYLAKEX OPENBLAS_CORE_SANDYBRIDGE
 #elif defined(DYN_NEHALEM)
-#define gotoblas_SKYLAKEX gotoblas_NEHALEM
+#define OPENBLAS_CORE_SKYLAKEX OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_SKYLAKEX gotoblas_PRESCOTT
+#define OPENBLAS_CORE_SKYLAKEX OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_COOPERLAKE
-extern gotoblas_t gotoblas_COOPERLAKE;
 #elif defined(DYN_SKYLAKEX)
-#define gotoblas_COOPERLAKE gotoblas_SKYLAKEX
+#define OPENBLAS_CORE_COOPERLAKE OPENBLAS_CORE_SKYLAKEX
 #elif defined(DYN_HASWELL)
-#define gotoblas_COOPERLAKE gotoblas_HASWELL
+#define OPENBLAS_CORE_COOPERLAKE OPENBLAS_CORE_HASWELL
 #elif defined(DYN_SANDYBRIDGE)
-#define gotoblas_COOPERLAKE gotoblas_SANDYBRIDGE
+#define OPENBLAS_CORE_COOPERLAKE OPENBLAS_CORE_SANDYBRIDGE
 #elif defined(DYN_NEHALEM)
-#define gotoblas_COOPERLAKE gotoblas_NEHALEM
+#define OPENBLAS_CORE_COOPERLAKE OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_COOPERLAKE gotoblas_PRESCOTT
+#define OPENBLAS_CORE_COOPERLAKE OPENBLAS_CORE_PRESCOTT
 #endif
 #ifdef DYN_SAPPHIRERAPIDS
-extern gotoblas_t gotoblas_SAPPHIRERAPIDS;
 #elif defined(DYN_SKYLAKEX)
-#define gotoblas_SAPPHIRERAPIDS gotoblas_SKYLAKEX
+#define OPENBLAS_CORE_SAPPHIRERAPIDS OPENBLAS_CORE_SKYLAKEX
 #elif defined(DYN_HASWELL)
-#define gotoblas_SAPPHIRERAPIDS gotoblas_HASWELL
+#define OPENBLAS_CORE_SAPPHIRERAPIDS OPENBLAS_CORE_HASWELL
 #elif defined(DYN_SANDYBRIDGE)
-#define gotoblas_SAPPHIRERAPIDS gotoblas_SANDYBRIDGE
+#define OPENBLAS_CORE_SAPPHIRERAPIDS OPENBLAS_CORE_SANDYBRIDGE
 #elif defined(DYN_NEHALEM)
-#define gotoblas_SAPPHIRERAPIDS gotoblas_NEHALEM
+#define OPENBLAS_CORE_SAPPHIRERAPIDS OPENBLAS_CORE_NEHALEM
 #else
-#define gotoblas_SAPPHIRERAPIDS gotoblas_PRESCOTT
+#define OPENBLAS_CORE_SAPPHIRERAPIDS OPENBLAS_CORE_PRESCOTT
 #endif
 
 
 #else // not DYNAMIC_LIST
-EXTERN gotoblas_t  gotoblas_KATMAI;
-EXTERN gotoblas_t  gotoblas_COPPERMINE;
-EXTERN gotoblas_t  gotoblas_NORTHWOOD;
-EXTERN gotoblas_t  gotoblas_BANIAS;
-EXTERN gotoblas_t  gotoblas_ATHLON;
-
-extern gotoblas_t  gotoblas_PRESCOTT;
-extern gotoblas_t  gotoblas_CORE2;
-extern gotoblas_t  gotoblas_NEHALEM;
-extern gotoblas_t  gotoblas_BARCELONA;
+#ifndef ARCH_X86
+/* These cores are 32-bit only and are not built into DYNAMIC_CORE on
+   x86_64, so they have no enumerator of their own.  Alias them to
+   PRESCOTT - the 64-bit sanity check below folds them there anyway. */
+#define OPENBLAS_CORE_KATMAI     OPENBLAS_CORE_PRESCOTT
+#define OPENBLAS_CORE_COPPERMINE OPENBLAS_CORE_PRESCOTT
+#define OPENBLAS_CORE_NORTHWOOD  OPENBLAS_CORE_PRESCOTT
+#define OPENBLAS_CORE_BANIAS     OPENBLAS_CORE_PRESCOTT
+#define OPENBLAS_CORE_ATHLON     OPENBLAS_CORE_PRESCOTT
+#endif
 #ifdef DYNAMIC_OLDER
-extern gotoblas_t  gotoblas_ATOM;
-extern gotoblas_t  gotoblas_NANO;
-extern gotoblas_t  gotoblas_PENRYN;
-extern gotoblas_t  gotoblas_DUNNINGTON;
-extern gotoblas_t  gotoblas_OPTERON;
-extern gotoblas_t  gotoblas_OPTERON_SSE3;
-extern gotoblas_t  gotoblas_BOBCAT;
 #else
-#define gotoblas_ATOM gotoblas_NEHALEM
-#define gotoblas_NANO gotoblas_NEHALEM
-#define gotoblas_PENRYN gotoblas_CORE2
-#define gotoblas_DUNNINGTON gotoblas_CORE2
-#define gotoblas_OPTERON gotoblas_CORE2
-#define gotoblas_OPTERON_SSE3 gotoblas_CORE2
-#define gotoblas_BOBCAT gotoblas_CORE2
+#define OPENBLAS_CORE_ATOM OPENBLAS_CORE_NEHALEM
+#define OPENBLAS_CORE_NANO OPENBLAS_CORE_NEHALEM
+#define OPENBLAS_CORE_PENRYN OPENBLAS_CORE_CORE2
+#define OPENBLAS_CORE_DUNNINGTON OPENBLAS_CORE_CORE2
+#define OPENBLAS_CORE_OPTERON OPENBLAS_CORE_CORE2
+#define OPENBLAS_CORE_OPTERON_SSE3 OPENBLAS_CORE_CORE2
+#define OPENBLAS_CORE_BOBCAT OPENBLAS_CORE_CORE2
 #endif
 
 #ifndef NO_AVX
-extern gotoblas_t  gotoblas_SANDYBRIDGE;
-extern gotoblas_t  gotoblas_BULLDOZER;
-extern gotoblas_t  gotoblas_PILEDRIVER;
-extern gotoblas_t  gotoblas_STEAMROLLER;
-extern gotoblas_t  gotoblas_EXCAVATOR;
 #ifdef NO_AVX2
-#define gotoblas_HASWELL gotoblas_SANDYBRIDGE
-#define gotoblas_SKYLAKEX gotoblas_SANDYBRIDGE
-#define gotoblas_COOPERLAKE gotoblas_SANDYBRIDGE
-#define gotoblas_ZEN gotoblas_SANDYBRIDGE
-#define gotoblas_SAPPHIRERAPIDS gotoblas_SANDYBRIDGE
+#define OPENBLAS_CORE_HASWELL OPENBLAS_CORE_SANDYBRIDGE
+#define OPENBLAS_CORE_SKYLAKEX OPENBLAS_CORE_SANDYBRIDGE
+#define OPENBLAS_CORE_COOPERLAKE OPENBLAS_CORE_SANDYBRIDGE
+#define OPENBLAS_CORE_ZEN OPENBLAS_CORE_SANDYBRIDGE
+#define OPENBLAS_CORE_SAPPHIRERAPIDS OPENBLAS_CORE_SANDYBRIDGE
 #else
-extern gotoblas_t  gotoblas_HASWELL;
-extern gotoblas_t  gotoblas_ZEN;
 #ifndef NO_AVX512
-extern gotoblas_t  gotoblas_SKYLAKEX;
-extern gotoblas_t  gotoblas_COOPERLAKE;
-extern gotoblas_t  gotoblas_SAPPHIRERAPIDS;
 #else
-#define gotoblas_SKYLAKEX gotoblas_HASWELL
-#define gotoblas_COOPERLAKE gotoblas_HASWELL
-#define gotoblas_SAPPHIRERAPIDS gotoblas_HASWELL
+#define OPENBLAS_CORE_SKYLAKEX OPENBLAS_CORE_HASWELL
+#define OPENBLAS_CORE_COOPERLAKE OPENBLAS_CORE_HASWELL
+#define OPENBLAS_CORE_SAPPHIRERAPIDS OPENBLAS_CORE_HASWELL
 #endif
 #endif
 #else
 //Use NEHALEM kernels for sandy bridge
-#define gotoblas_SANDYBRIDGE gotoblas_NEHALEM
-#define gotoblas_HASWELL gotoblas_NEHALEM
-#define gotoblas_SKYLAKEX gotoblas_NEHALEM
-#define gotoblas_COOPERLAKE gotoblas_NEHALEM
-#define gotoblas_SAPPHIRERAPIDS gotoblas_NEHALEM
-#define gotoblas_BULLDOZER gotoblas_BARCELONA
-#define gotoblas_PILEDRIVER gotoblas_BARCELONA
-#define gotoblas_STEAMROLLER gotoblas_BARCELONA
-#define gotoblas_EXCAVATOR gotoblas_BARCELONA
-#define gotoblas_ZEN gotoblas_BARCELONA
+#define OPENBLAS_CORE_SANDYBRIDGE OPENBLAS_CORE_NEHALEM
+#define OPENBLAS_CORE_HASWELL OPENBLAS_CORE_NEHALEM
+#define OPENBLAS_CORE_SKYLAKEX OPENBLAS_CORE_NEHALEM
+#define OPENBLAS_CORE_COOPERLAKE OPENBLAS_CORE_NEHALEM
+#define OPENBLAS_CORE_SAPPHIRERAPIDS OPENBLAS_CORE_NEHALEM
+#define OPENBLAS_CORE_BULLDOZER OPENBLAS_CORE_BARCELONA
+#define OPENBLAS_CORE_PILEDRIVER OPENBLAS_CORE_BARCELONA
+#define OPENBLAS_CORE_STEAMROLLER OPENBLAS_CORE_BARCELONA
+#define OPENBLAS_CORE_EXCAVATOR OPENBLAS_CORE_BARCELONA
+#define OPENBLAS_CORE_ZEN OPENBLAS_CORE_BARCELONA
 #endif
 
 #endif // DYNAMIC_LIST
@@ -455,7 +412,7 @@ static int get_vendor(void){
   return VENDOR_UNKNOWN;
 }
 
-static gotoblas_t *get_coretype(void){
+static int get_coretype(void){
 
   int eax, ebx, ecx, edx;
   int family, exfamily, model, vendor, exmodel, stepping;
@@ -475,341 +432,341 @@ static gotoblas_t *get_coretype(void){
     case 0x6:
       switch (exmodel) {
       case 0:
-	if (model <= 0x7) return &gotoblas_KATMAI;
-	if ((model == 0x8) || (model == 0xa) || (model == 0xb)) return &gotoblas_COPPERMINE;
-	if ((model == 0x9) || (model == 0xd)) return &gotoblas_BANIAS;
-	if (model == 14) return &gotoblas_BANIAS;
-	if (model == 15) return &gotoblas_CORE2;
-	return NULL;
+	if (model <= 0x7) return OPENBLAS_CORE_KATMAI;
+	if ((model == 0x8) || (model == 0xa) || (model == 0xb)) return OPENBLAS_CORE_COPPERMINE;
+	if ((model == 0x9) || (model == 0xd)) return OPENBLAS_CORE_BANIAS;
+	if (model == 14) return OPENBLAS_CORE_BANIAS;
+	if (model == 15) return OPENBLAS_CORE_CORE2;
+	return -1;
 
       case 1:
-	if (model == 6) return &gotoblas_CORE2;
-	if (model == 7) return &gotoblas_PENRYN;
-	if (model == 13) return &gotoblas_DUNNINGTON;
-	if ((model == 10) || (model == 11) || (model == 14) || (model == 15)) return &gotoblas_NEHALEM;
-	if (model == 12) return &gotoblas_ATOM;
-	return NULL;
+	if (model == 6) return OPENBLAS_CORE_CORE2;
+	if (model == 7) return OPENBLAS_CORE_PENRYN;
+	if (model == 13) return OPENBLAS_CORE_DUNNINGTON;
+	if ((model == 10) || (model == 11) || (model == 14) || (model == 15)) return OPENBLAS_CORE_NEHALEM;
+	if (model == 12) return OPENBLAS_CORE_ATOM;
+	return -1;
 
       case 2:
 	//Intel Core (Clarkdale) / Core (Arrandale)
 	// Pentium (Clarkdale) / Pentium Mobile (Arrandale)
 	// Xeon (Clarkdale), 32nm
-	if (model ==  5) return &gotoblas_NEHALEM;
+	if (model ==  5) return OPENBLAS_CORE_NEHALEM;
 
 	//Intel Xeon Processor 5600 (Westmere-EP)
 	//Xeon Processor E7 (Westmere-EX)
 	//Xeon E7540
-	if (model == 12 || model == 14 || model == 15) return &gotoblas_NEHALEM;
+	if (model == 12 || model == 14 || model == 15) return OPENBLAS_CORE_NEHALEM;
 
 	//Intel Core i5-2000 /i7-2000 (Sandy Bridge)
 	//Intel Core i7-3000 / Xeon E5
 	if (model == 10 || model == 13) {
 	  if(support_avx())
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  else{
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
-	return NULL;
+	return -1;
       case 3:
 	//Intel Sandy Bridge 22nm (Ivy Bridge?)
 	if (model == 10 || model == 14) {
 	  if(support_avx())
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  else{
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
 	//Intel Haswell
 	if (model == 12 || model == 15) {
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
 	//Intel Broadwell
 	if (model == 13) {
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
-	if (model == 7) return &gotoblas_ATOM; //Bay Trail	
-	return NULL;
+	if (model == 7) return OPENBLAS_CORE_ATOM; //Bay Trail	
+	return -1;
       case 4:
 		//Intel Haswell
 	if (model == 5 || model == 6) {
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
 	//Intel Broadwell
 	if (model == 7 || model == 15) {
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
 	//Intel Skylake
 	if (model == 14) {
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
 	//Intel Braswell / Avoton
 	if (model == 12 || model == 13) { 
-	  return &gotoblas_NEHALEM;
+	  return OPENBLAS_CORE_NEHALEM;
 	}	
-	return NULL;
+	return -1;
       case 5:
 	//Intel Broadwell
 	if (model == 6) {
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
 	if (model == 5) {
 	// Intel Cooperlake
           if(support_avx512_bf16())
-             return &gotoblas_COOPERLAKE;
+             return OPENBLAS_CORE_COOPERLAKE;
 	// Intel Skylake X
           if (support_avx512()) 
-	    return &gotoblas_SKYLAKEX;
+	    return OPENBLAS_CORE_SKYLAKEX;
 	  if(support_avx2()){
 	    openblas_warning(FALLBACK_VERBOSE, HASWELL_FALLBACK);
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
           }
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
           openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-          return &gotoblas_NEHALEM;
+          return OPENBLAS_CORE_NEHALEM;
           }
 	}
 	//Intel Skylake
 	if (model == 14) {
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
 	//Intel Phi Knights Landing
 	if (model == 7) {
 	  if(support_avx2()){
 	    openblas_warning(FALLBACK_VERBOSE, HASWELL_FALLBACK);
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  }  
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
 	//Apollo Lake or Denverton
 	if (model == 12 || model == 15) { 
-	  return &gotoblas_NEHALEM;
+	  return OPENBLAS_CORE_NEHALEM;
 	}	
-	return NULL;
+	return -1;
       case 6:
         if (model == 6) {
           // Cannon Lake
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM;
+	    return OPENBLAS_CORE_NEHALEM;
 	  }
         }
 	if (model == 10 || model == 12){
           // Ice Lake SP
 	   if(support_avx512_bf16())
-             return &gotoblas_COOPERLAKE;
+             return OPENBLAS_CORE_COOPERLAKE;
           if (support_avx512()) 
-	    return &gotoblas_SKYLAKEX;
+	    return OPENBLAS_CORE_SKYLAKEX;
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM;
+	    return OPENBLAS_CORE_NEHALEM;
 	  }
         }
-        return NULL;  
+        return -1;  
       case 7:
 	if (model == 10) // Goldmont Plus
-	   return &gotoblas_NEHALEM;
+	   return OPENBLAS_CORE_NEHALEM;
         if (model == 13 || model == 14) {
 	// Ice Lake
           if (support_avx512()) 
-	    return &gotoblas_SKYLAKEX;
+	    return OPENBLAS_CORE_SKYLAKEX;
 	  if(support_avx2()){
 	    openblas_warning(FALLBACK_VERBOSE, HASWELL_FALLBACK);
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
           }
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
           openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-          return &gotoblas_NEHALEM;
+          return OPENBLAS_CORE_NEHALEM;
           }
         }
-        return NULL;  
+        return -1;  
       case 8:
         if (model == 12 || model == 13) { // Tiger Lake
           if (support_avx512()) 
-            return &gotoblas_SKYLAKEX;
+            return OPENBLAS_CORE_SKYLAKEX;
           if(support_avx2()){
             openblas_warning(FALLBACK_VERBOSE, HASWELL_FALLBACK);
-            return &gotoblas_HASWELL;
+            return OPENBLAS_CORE_HASWELL;
           }
           if(support_avx()) {
             openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-            return &gotoblas_SANDYBRIDGE;
+            return OPENBLAS_CORE_SANDYBRIDGE;
           } else {
           openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-          return &gotoblas_NEHALEM;
+          return OPENBLAS_CORE_NEHALEM;
           }
         }
 	if (model == 14 ) { // Kaby Lake, Coffee Lake
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
 	if (model == 15){          // Sapphire Rapids
 	   if(support_amx_bf16())
-	     return &gotoblas_SAPPHIRERAPIDS;
+	     return OPENBLAS_CORE_SAPPHIRERAPIDS;
 	   if(support_avx512_bf16())
-             return &gotoblas_COOPERLAKE;
+             return OPENBLAS_CORE_COOPERLAKE;
           if (support_avx512()) 
-	    return &gotoblas_SKYLAKEX;
+	    return OPENBLAS_CORE_SKYLAKEX;
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM;
+	    return OPENBLAS_CORE_NEHALEM;
 	  }
         }
-	return NULL;
+	return -1;
 	
 	
       case 9:
         if (model == 7 || model == 10) { // Alder Lake
 	   if(support_avx512_bf16())
-             return &gotoblas_COOPERLAKE;
+             return OPENBLAS_CORE_COOPERLAKE;
           if (support_avx512()) 
-	    return &gotoblas_SKYLAKEX;
+	    return OPENBLAS_CORE_SKYLAKEX;
           if(support_avx2()){
-            return &gotoblas_HASWELL;
+            return OPENBLAS_CORE_HASWELL;
           }
           if(support_avx()) {
             openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-            return &gotoblas_SANDYBRIDGE;
+            return OPENBLAS_CORE_SANDYBRIDGE;
           } else {
           openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-          return &gotoblas_NEHALEM;
+          return OPENBLAS_CORE_NEHALEM;
           }
         }
 	if (model == 14 ) { // Kaby Lake, Coffee Lake
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
-	return NULL;
+	return -1;
       case 10:
         if (model == 5 || model == 6) {
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
         }
         if (model == 7) {
 	  if (support_avx512()) 
-	    return &gotoblas_SKYLAKEX;
+	    return OPENBLAS_CORE_SKYLAKEX;
 	  if(support_avx2())
-	    return &gotoblas_HASWELL;
+	    return OPENBLAS_CORE_HASWELL;
 	  if(support_avx()) {
 	    openblas_warning(FALLBACK_VERBOSE, SANDYBRIDGE_FALLBACK);
-	    return &gotoblas_SANDYBRIDGE;
+	    return OPENBLAS_CORE_SANDYBRIDGE;
 	  } else {
 	    openblas_warning(FALLBACK_VERBOSE, NEHALEM_FALLBACK);
-	    return &gotoblas_NEHALEM; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_NEHALEM; //OS doesn't support AVX. Use old kernels.
 	  }
         }      
-	return NULL;
+	return -1;
       }
       break;
     case 0xf:
-      if (model <= 0x2) return &gotoblas_NORTHWOOD;
-      return &gotoblas_PRESCOTT;
+      if (model <= 0x2) return OPENBLAS_CORE_NORTHWOOD;
+      return OPENBLAS_CORE_PRESCOTT;
     }
   }
 
@@ -820,76 +777,76 @@ static gotoblas_t *get_coretype(void){
         if ( (eax & 0xffff)  >= 0x01) {
             cpuid(0x80000001, &eax, &ebx, &ecx, &edx);
             if ((edx & (1 << 30)) == 0 || (edx & (1u << 31)) == 0)
-              return NULL;
+              return -1;
           }
         else
-          return NULL;
+          return -1;
 
-        return &gotoblas_ATHLON;
+        return OPENBLAS_CORE_ATHLON;
       }
     if (family == 0xf){
       if ((exfamily == 0) || (exfamily == 2)) {
 		if (exmodel == 6 && model == 11) { /*QEMU virtual cpu*/
 	      if (support_avx512_bf16())
-             return &gotoblas_COOPERLAKE;
+             return OPENBLAS_CORE_COOPERLAKE;
           if (support_avx512())
-	         return &gotoblas_SKYLAKEX;
+	         return OPENBLAS_CORE_SKYLAKEX;
           if (support_avx2())
-			 return &gotoblas_ZEN;
+			 return OPENBLAS_CORE_ZEN;
           else
-            return &gotoblas_BARCELONA;
+            return OPENBLAS_CORE_BARCELONA;
 		}
-	    if (ecx & (1 <<  0)) return &gotoblas_OPTERON_SSE3;
-	else return &gotoblas_OPTERON;
+	    if (ecx & (1 <<  0)) return OPENBLAS_CORE_OPTERON_SSE3;
+	else return OPENBLAS_CORE_OPTERON;
       }  else if (exfamily == 5 || exfamily == 7) {
-	return &gotoblas_BOBCAT;
+	return OPENBLAS_CORE_BOBCAT;
       } else if (exfamily == 6) {
 	if(model == 1){
 	  //AMD Bulldozer Opteron 6200 / Opteron 4200 / AMD FX-Series
 	  if(support_avx())
-	    return &gotoblas_BULLDOZER;
+	    return OPENBLAS_CORE_BULLDOZER;
 	  else{
 	    openblas_warning(FALLBACK_VERBOSE, BARCELONA_FALLBACK);
-	    return &gotoblas_BARCELONA; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_BARCELONA; //OS doesn't support AVX. Use old kernels.
 	  }
 	}else if(model == 2 || model == 3){
 	  //AMD Bulldozer Opteron 6300 / Opteron 4300 / Opteron 3300
 	  if(support_avx())
-	    return &gotoblas_PILEDRIVER;
+	    return OPENBLAS_CORE_PILEDRIVER;
 	  else{
 	    openblas_warning(FALLBACK_VERBOSE, BARCELONA_FALLBACK);
-	    return &gotoblas_BARCELONA; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_BARCELONA; //OS doesn't support AVX. Use old kernels.
 	  }
 	}else if(model == 5){
 	  if(support_avx())
-	    return &gotoblas_EXCAVATOR;
+	    return OPENBLAS_CORE_EXCAVATOR;
 	  else{
 	    openblas_warning(FALLBACK_VERBOSE, BARCELONA_FALLBACK);
-	    return &gotoblas_BARCELONA; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_BARCELONA; //OS doesn't support AVX. Use old kernels.
 	  }
 	}else if(model == 0 || model == 8){
 	  if (exmodel == 1) {
 	    //AMD Trinity
 	    if(support_avx())
-	      return &gotoblas_PILEDRIVER;
+	      return OPENBLAS_CORE_PILEDRIVER;
 	    else{
 	      openblas_warning(FALLBACK_VERBOSE, BARCELONA_FALLBACK);
-	      return &gotoblas_BARCELONA; //OS doesn't support AVX. Use old kernels.
+	      return OPENBLAS_CORE_BARCELONA; //OS doesn't support AVX. Use old kernels.
 	    }
 	   }else if (exmodel == 3) {
 	    //AMD STEAMROLLER
 	    if(support_avx())
-	      return &gotoblas_STEAMROLLER;
+	      return OPENBLAS_CORE_STEAMROLLER;
 	    else{
 	      openblas_warning(FALLBACK_VERBOSE, BARCELONA_FALLBACK);
-	      return &gotoblas_BARCELONA; //OS doesn't support AVX. Use old kernels.
+	      return OPENBLAS_CORE_BARCELONA; //OS doesn't support AVX. Use old kernels.
 	    }
 	  }else if (exmodel == 6) {
 	    if(support_avx())
-	      return &gotoblas_EXCAVATOR;
+	      return OPENBLAS_CORE_EXCAVATOR;
 	    else{
 	      openblas_warning(FALLBACK_VERBOSE, BARCELONA_FALLBACK);
-	      return &gotoblas_BARCELONA; //OS doesn't support AVX. Use old kernels.
+	      return OPENBLAS_CORE_BARCELONA; //OS doesn't support AVX. Use old kernels.
 	    }
 
 	  }
@@ -897,32 +854,32 @@ static gotoblas_t *get_coretype(void){
       } else if (exfamily == 8) {
 	/* if (model == 1 || model == 8) */ {
 	  if(support_avx())
-	    return &gotoblas_ZEN;
+	    return OPENBLAS_CORE_ZEN;
 	  else{
 	    openblas_warning(FALLBACK_VERBOSE, BARCELONA_FALLBACK);
-	    return &gotoblas_BARCELONA; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_BARCELONA; //OS doesn't support AVX. Use old kernels.
 	  }
 	}
       } else if (exfamily == 9) {  
 	  if(support_avx())
-	    return &gotoblas_ZEN;
+	    return OPENBLAS_CORE_ZEN;
 	  else{
 	    openblas_warning(FALLBACK_VERBOSE, BARCELONA_FALLBACK);
-	    return &gotoblas_BARCELONA; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_BARCELONA; //OS doesn't support AVX. Use old kernels.
           }
       } else if (exfamily == 10) {
 	  if(support_avx512_bf16())
-	    return &gotoblas_COOPERLAKE;
+	    return OPENBLAS_CORE_COOPERLAKE;
 	  if(support_avx512())
-	    return &gotoblas_SKYLAKEX;
+	    return OPENBLAS_CORE_SKYLAKEX;
 	  if(support_avx())
-	    return &gotoblas_ZEN;
+	    return OPENBLAS_CORE_ZEN;
 	  else{
 	    openblas_warning(FALLBACK_VERBOSE, BARCELONA_FALLBACK);
-	    return &gotoblas_BARCELONA; //OS doesn't support AVX. Use old kernels.
+	    return OPENBLAS_CORE_BARCELONA; //OS doesn't support AVX. Use old kernels.
           }
       }else {
-	return NULL;
+	return -1;
       }
    
     }
@@ -932,22 +889,22 @@ static gotoblas_t *get_coretype(void){
     switch (family) {
     case 0x6:
       if (model == 0xf && stepping < 0xe)
-        return &gotoblas_NANO;
-      return &gotoblas_NEHALEM;
+        return OPENBLAS_CORE_NANO;
+      return OPENBLAS_CORE_NEHALEM;
 	case 0x7:
       switch (exmodel) {
       case 5:
       case 6:
         if (support_avx2())
-          return &gotoblas_ZEN;
+          return OPENBLAS_CORE_ZEN;
         else
-          return &gotoblas_DUNNINGTON;
+          return OPENBLAS_CORE_DUNNINGTON;
       default:
-        return &gotoblas_NEHALEM;
+        return OPENBLAS_CORE_NEHALEM;
       }
     default:
       if (family >= 0x8)
-        return &gotoblas_NEHALEM;
+        return OPENBLAS_CORE_NEHALEM;
     }
   }
 
@@ -957,24 +914,24 @@ static gotoblas_t *get_coretype(void){
         switch (exmodel) {
         case 5:
           if (support_avx2())
-            return &gotoblas_ZEN;
+            return OPENBLAS_CORE_ZEN;
           else
-            return &gotoblas_DUNNINGTON;
+            return OPENBLAS_CORE_DUNNINGTON;
         default:
           if (support_avx2())
-            return &gotoblas_ZEN;
+            return OPENBLAS_CORE_ZEN;
           else
-          return &gotoblas_NEHALEM;
+          return OPENBLAS_CORE_NEHALEM;
         }
       default:
           if (support_avx2())
-            return &gotoblas_ZEN;
+            return OPENBLAS_CORE_ZEN;
           else
-        return &gotoblas_NEHALEM;
+        return OPENBLAS_CORE_NEHALEM;
     }
   }
 
-  return NULL;
+  return -1;
 }
 
 static char *corename[] = {
@@ -1009,73 +966,82 @@ static char *corename[] = {
 
 char *gotoblas_corename(void) {
 
-  if (gotoblas == &gotoblas_KATMAI)       return corename[ 1];
-  if (gotoblas == &gotoblas_COPPERMINE)   return corename[ 2];
-  if (gotoblas == &gotoblas_NORTHWOOD)    return corename[ 3];
-  if (gotoblas == &gotoblas_PRESCOTT)     return corename[ 4];
-  if (gotoblas == &gotoblas_BANIAS)       return corename[ 5];
-  if (gotoblas == &gotoblas_ATOM)
+  /* On x86_64 the 32-bit-only cores are aliases of PRESCOTT (see above), so
+     testing them here would claim every Prescott selection is a Katmai.  They
+     only have identities of their own on x86. */
+#ifdef ARCH_X86
+  if (openblas_core == OPENBLAS_CORE_KATMAI)       return corename[ 1];
+  if (openblas_core == OPENBLAS_CORE_COPPERMINE)   return corename[ 2];
+  if (openblas_core == OPENBLAS_CORE_NORTHWOOD)    return corename[ 3];
+#endif
+  if (openblas_core == OPENBLAS_CORE_PRESCOTT)     return corename[ 4];
+#ifdef ARCH_X86
+  if (openblas_core == OPENBLAS_CORE_BANIAS)       return corename[ 5];
+#endif
+  if (openblas_core == OPENBLAS_CORE_ATOM)
 #ifdef DYNAMIC_OLDER
            return corename[ 6];
 #else
            return corename[10];
 #endif
-  if (gotoblas == &gotoblas_CORE2)        return corename[ 7];
-  if (gotoblas == &gotoblas_PENRYN)
+  if (openblas_core == OPENBLAS_CORE_CORE2)        return corename[ 7];
+  if (openblas_core == OPENBLAS_CORE_PENRYN)
 #ifdef DYNAMIC_OLDER
            return corename[ 8];
 #else
            return corename[7];
 #endif
-  if (gotoblas == &gotoblas_DUNNINGTON)
+  if (openblas_core == OPENBLAS_CORE_DUNNINGTON)
 #ifdef DYNAMIC_OLDER
            return corename[ 9];
 #else
            return corename[7];
 #endif
-  if (gotoblas == &gotoblas_NEHALEM)      return corename[10];
-  if (gotoblas == &gotoblas_ATHLON)       return corename[11];
-  if (gotoblas == &gotoblas_OPTERON_SSE3)
+  if (openblas_core == OPENBLAS_CORE_NEHALEM)      return corename[10];
+#ifdef ARCH_X86
+  if (openblas_core == OPENBLAS_CORE_ATHLON)       return corename[11];
+#endif
+  if (openblas_core == OPENBLAS_CORE_OPTERON_SSE3)
 #ifdef DYNAMIC_OLDER
            return corename[12];
 #else
            return corename[7];
 #endif
-  if (gotoblas == &gotoblas_OPTERON)
+  if (openblas_core == OPENBLAS_CORE_OPTERON)
 #ifdef DYNAMIC_OLDER
            return corename[13];
 #else
            return corename[7];
 #endif
-  if (gotoblas == &gotoblas_BARCELONA)    return corename[14];
-  if (gotoblas == &gotoblas_NANO)
+  if (openblas_core == OPENBLAS_CORE_BARCELONA)    return corename[14];
+  if (openblas_core == OPENBLAS_CORE_NANO)
 #ifdef DYNAMIC_OLDER
            return corename[15];
 #else
            return corename[10];
 #endif
-  if (gotoblas == &gotoblas_SANDYBRIDGE)  return corename[16];
-  if (gotoblas == &gotoblas_BOBCAT)
+  if (openblas_core == OPENBLAS_CORE_SANDYBRIDGE)  return corename[16];
+  if (openblas_core == OPENBLAS_CORE_BOBCAT)
 #ifdef DYNAMIC_OLDER
            return corename[17];
 #else
            return corename[7];
 #endif
-  if (gotoblas == &gotoblas_BULLDOZER)    return corename[18];
-  if (gotoblas == &gotoblas_PILEDRIVER)   return corename[19];
-  if (gotoblas == &gotoblas_HASWELL)      return corename[20];
-  if (gotoblas == &gotoblas_STEAMROLLER)  return corename[21];
-  if (gotoblas == &gotoblas_EXCAVATOR)    return corename[22];
-  if (gotoblas == &gotoblas_ZEN)          return corename[23];
-  if (gotoblas == &gotoblas_SKYLAKEX)     return corename[24];
-  if (gotoblas == &gotoblas_COOPERLAKE)   return corename[25];
-  if (gotoblas == &gotoblas_SAPPHIRERAPIDS) return corename[26];
+  if (openblas_core == OPENBLAS_CORE_BULLDOZER)    return corename[18];
+  if (openblas_core == OPENBLAS_CORE_PILEDRIVER)   return corename[19];
+  if (openblas_core == OPENBLAS_CORE_HASWELL)      return corename[20];
+  if (openblas_core == OPENBLAS_CORE_STEAMROLLER)  return corename[21];
+  if (openblas_core == OPENBLAS_CORE_EXCAVATOR)    return corename[22];
+  if (openblas_core == OPENBLAS_CORE_ZEN)          return corename[23];
+  if (openblas_core == OPENBLAS_CORE_SKYLAKEX)     return corename[24];
+  if (openblas_core == OPENBLAS_CORE_COOPERLAKE)   return corename[25];
+  if (openblas_core == OPENBLAS_CORE_SAPPHIRERAPIDS) return corename[26];
   return corename[0];
 }
 
 
 
-static gotoblas_t *force_coretype(char *coretype){
+static int force_coretype(char *coretype){
 
 	int i ;
 	int found = -1;
@@ -1095,38 +1061,38 @@ static gotoblas_t *force_coretype(char *coretype){
 	        //strncpy(mname,coretype,20);
 	        snprintf(message, 128, "Core not found: %s\n",coretype);
     		openblas_warning(1, message);
-		return(NULL);
+		return -1;
 	}
 
 	switch (found)
 	{
-		case 25: return (&gotoblas_COOPERLAKE);
-		case 24: return (&gotoblas_SKYLAKEX);	
-		case 23: return (&gotoblas_ZEN);
-		case 22: return (&gotoblas_EXCAVATOR);
-		case 21: return (&gotoblas_STEAMROLLER);
-		case 20: return (&gotoblas_HASWELL);
-		case 19: return (&gotoblas_PILEDRIVER);
-		case 18: return (&gotoblas_BULLDOZER);
-		case 17: return (&gotoblas_BOBCAT);
-		case 16: return (&gotoblas_SANDYBRIDGE);
-		case 15: return (&gotoblas_NANO);
-		case 14: return (&gotoblas_BARCELONA);
-		case 13: return (&gotoblas_OPTERON);
-		case 12: return (&gotoblas_OPTERON_SSE3);
-		case 11: return (&gotoblas_ATHLON);
-		case 10: return (&gotoblas_NEHALEM);
-		case  9: return (&gotoblas_DUNNINGTON);
-		case  8: return (&gotoblas_PENRYN);
-		case  7: return (&gotoblas_CORE2);
-		case  6: return (&gotoblas_ATOM);
-		case  5: return (&gotoblas_BANIAS);
-		case  4: return (&gotoblas_PRESCOTT);
-		case  3: return (&gotoblas_NORTHWOOD);
-		case  2: return (&gotoblas_COPPERMINE);
-		case  1: return (&gotoblas_KATMAI);
+		case 25: return OPENBLAS_CORE_COOPERLAKE;
+		case 24: return OPENBLAS_CORE_SKYLAKEX;	
+		case 23: return OPENBLAS_CORE_ZEN;
+		case 22: return OPENBLAS_CORE_EXCAVATOR;
+		case 21: return OPENBLAS_CORE_STEAMROLLER;
+		case 20: return OPENBLAS_CORE_HASWELL;
+		case 19: return OPENBLAS_CORE_PILEDRIVER;
+		case 18: return OPENBLAS_CORE_BULLDOZER;
+		case 17: return OPENBLAS_CORE_BOBCAT;
+		case 16: return OPENBLAS_CORE_SANDYBRIDGE;
+		case 15: return OPENBLAS_CORE_NANO;
+		case 14: return OPENBLAS_CORE_BARCELONA;
+		case 13: return OPENBLAS_CORE_OPTERON;
+		case 12: return OPENBLAS_CORE_OPTERON_SSE3;
+		case 11: return OPENBLAS_CORE_ATHLON;
+		case 10: return OPENBLAS_CORE_NEHALEM;
+		case  9: return OPENBLAS_CORE_DUNNINGTON;
+		case  8: return OPENBLAS_CORE_PENRYN;
+		case  7: return OPENBLAS_CORE_CORE2;
+		case  6: return OPENBLAS_CORE_ATOM;
+		case  5: return OPENBLAS_CORE_BANIAS;
+		case  4: return OPENBLAS_CORE_PRESCOTT;
+		case  3: return OPENBLAS_CORE_NORTHWOOD;
+		case  2: return OPENBLAS_CORE_COPPERMINE;
+		case  1: return OPENBLAS_CORE_KATMAI;
 	}
-	return(NULL);
+	return -1;
 
 }
 
@@ -1140,44 +1106,44 @@ void gotoblas_dynamic_init(void) {
   char *p;
 
 
-  if (gotoblas) return;
+  if (openblas_core >= 0) return;
 
   p = getenv("OPENBLAS_CORETYPE");
   if ( p )
   {
-	gotoblas = force_coretype(p);
+	openblas_core = force_coretype(p);
   }
   else
   {
-  	gotoblas = get_coretype();
+  	openblas_core = get_coretype();
   }
 
 #ifdef ARCH_X86
-  if (gotoblas == NULL) gotoblas = &gotoblas_KATMAI;
+  if (openblas_core < 0) openblas_core = OPENBLAS_CORE_KATMAI;
 #else
-  if (gotoblas == NULL) {
-   if (support_avx512_bf16()) gotoblas = &gotoblas_COOPERLAKE;
-   else if (support_avx512()) gotoblas = &gotoblas_SKYLAKEX;
-   else if   (support_avx2()) gotoblas = &gotoblas_HASWELL;
-   else if    (support_avx()) gotoblas = &gotoblas_SANDYBRIDGE;
-   else                       gotoblas = &gotoblas_PRESCOTT;
+  if (openblas_core < 0) {
+   if (support_avx512_bf16()) openblas_core = OPENBLAS_CORE_COOPERLAKE;
+   else if (support_avx512()) openblas_core = OPENBLAS_CORE_SKYLAKEX;
+   else if   (support_avx2()) openblas_core = OPENBLAS_CORE_HASWELL;
+   else if    (support_avx()) openblas_core = OPENBLAS_CORE_SANDYBRIDGE;
+   else                       openblas_core = OPENBLAS_CORE_PRESCOTT;
   }
   /* sanity check, if 64bit pointer we can't have a 32 bit cpu */
   if (sizeof(void*) == 8) {
-      if (gotoblas == &gotoblas_KATMAI ||
-          gotoblas == &gotoblas_COPPERMINE ||
-          gotoblas == &gotoblas_NORTHWOOD ||
-          gotoblas == &gotoblas_BANIAS ||
-          gotoblas == &gotoblas_ATHLON)
-          gotoblas = &gotoblas_PRESCOTT;
+      if (openblas_core == OPENBLAS_CORE_KATMAI ||
+          openblas_core == OPENBLAS_CORE_COPPERMINE ||
+          openblas_core == OPENBLAS_CORE_NORTHWOOD ||
+          openblas_core == OPENBLAS_CORE_BANIAS ||
+          openblas_core == OPENBLAS_CORE_ATHLON)
+          openblas_core = OPENBLAS_CORE_PRESCOTT;
   }
 #endif
 
-  if (gotoblas && gotoblas -> init) {
+  if (openblas_core >= 0 && openblas_params_tab[openblas_core]->init) {
     strncpy(coren,gotoblas_corename(),20);
     sprintf(coremsg, "Core: %s\n",coren);
     openblas_warning(2, coremsg);
-    gotoblas -> init();
+    openblas_params_tab[openblas_core]->init();
   } else {
     openblas_warning(0, "OpenBLAS : Architecture Initialization failed. No initialization function found.\n");
     exit(1);
@@ -1187,6 +1153,6 @@ void gotoblas_dynamic_init(void) {
 
 void gotoblas_dynamic_quit(void) {
 
-  gotoblas = NULL;
+  openblas_core = -1;
 
 }

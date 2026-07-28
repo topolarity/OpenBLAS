@@ -38,10 +38,6 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PRID_SERIES_LA464   0xc000
 #define PRID_SERIES_LA664   0xd000
 
-extern gotoblas_t  gotoblas_LA64_GENERIC;
-extern gotoblas_t  gotoblas_LA264;
-extern gotoblas_t  gotoblas_LA464;
-
 extern void openblas_warning(int verbose, const char * msg);
 
 static char *corename[] = {
@@ -55,13 +51,13 @@ static char *corename[] = {
 };
 
 char *gotoblas_corename(void) {
-  if (gotoblas == &gotoblas_LA64_GENERIC) return corename[0];
-  if (gotoblas == &gotoblas_LA264)        return corename[1];
-  if (gotoblas == &gotoblas_LA464)        return corename[2];
+  if (openblas_core == OPENBLAS_CORE_LA64_GENERIC) return corename[0];
+  if (openblas_core == OPENBLAS_CORE_LA264)        return corename[1];
+  if (openblas_core == OPENBLAS_CORE_LA464)        return corename[2];
   return corename[NUM_CORETYPES];
 }
 
-static gotoblas_t *force_coretype(char *coretype) {
+static int force_coretype(char *coretype) {
   int i;
   int found = -1;
   char message[128];
@@ -77,16 +73,16 @@ static gotoblas_t *force_coretype(char *coretype) {
 
   switch (found)
   {
-    case  0: return (&gotoblas_LA64_GENERIC);
-    case  1: return (&gotoblas_LA264);
-    case  2: return (&gotoblas_LA464);
-    case  3: return (&gotoblas_LA64_GENERIC);
-    case  4: return (&gotoblas_LA264);
-    case  5: return (&gotoblas_LA464);
+    case  0: return OPENBLAS_CORE_LA64_GENERIC;
+    case  1: return OPENBLAS_CORE_LA264;
+    case  2: return OPENBLAS_CORE_LA464;
+    case  3: return OPENBLAS_CORE_LA64_GENERIC;
+    case  4: return OPENBLAS_CORE_LA264;
+    case  5: return OPENBLAS_CORE_LA464;
   }
   snprintf(message, 128, "Core not found: %s\n", coretype);
   openblas_warning(1, message);
-  return NULL;
+  return -1;
 }
 
 
@@ -124,29 +120,29 @@ static uint32_t get_prid() {
  * cpu name and SIMD instructions supported
  * by the system
  */
-static gotoblas_t *get_coretype(void) {
+static int get_coretype(void) {
   uint32_t prid = get_prid();
   switch (prid & PRID_SERIES_MASK) {
     case (PRID_SERIES_LA464):
     case (PRID_SERIES_LA664):
       if (os_support_lasx())
-        return &gotoblas_LA464;
+        return OPENBLAS_CORE_LA464;
       else if (os_support_lsx())
-        return &gotoblas_LA264;
+        return OPENBLAS_CORE_LA264;
       else
-        return &gotoblas_LA64_GENERIC;
+        return OPENBLAS_CORE_LA64_GENERIC;
     break;
 
     case (PRID_SERIES_LA264):
     case (PRID_SERIES_LA364):
       if (os_support_lsx())
-        return &gotoblas_LA264;
+        return OPENBLAS_CORE_LA264;
       else
-        return &gotoblas_LA64_GENERIC;
+        return OPENBLAS_CORE_LA64_GENERIC;
     break;
 
     default:
-      return &gotoblas_LA64_GENERIC;
+      return OPENBLAS_CORE_LA64_GENERIC;
     break;
   }
 }
@@ -156,23 +152,23 @@ void gotoblas_dynamic_init(void) {
   char coren[22];
   char *p;
 
-  if (gotoblas) return;
+  if (openblas_core >= 0) return;
 
   p = getenv("OPENBLAS_CORETYPE");
   if ( p )
   {
-    gotoblas = force_coretype(p);
+    openblas_core = force_coretype(p);
   }
   else
   {
-    gotoblas = get_coretype();
+    openblas_core = get_coretype();
   }
 
-  if (gotoblas && gotoblas->init) {
+  if (openblas_core >= 0 && openblas_params_tab[openblas_core]->init) {
     strncpy(coren, gotoblas_corename(), 20);
     sprintf(coremsg, "Core: %s\n", coren);
     openblas_warning(2, coremsg);
-    gotoblas -> init();
+    openblas_params_tab[openblas_core]->init();
   } else {
     openblas_warning(0, "OpenBLAS : Architecture Initialization failed. No initialization function found.\n");
     exit(1);
@@ -181,5 +177,5 @@ void gotoblas_dynamic_init(void) {
 }
 
 void gotoblas_dynamic_quit(void) {
-  gotoblas = NULL;
+  openblas_core = -1;
 }

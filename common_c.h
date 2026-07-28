@@ -236,46 +236,42 @@
 
 #else
 
-#define	CAMAX_K			gotoblas -> camax_k
-#define	CAMIN_K			gotoblas -> camin_k
-#define	CMAX_K			gotoblas -> cmax_k
-#define	CMIN_K			gotoblas -> cmin_k
-#define	ICAMAX_K		gotoblas -> icamax_k
-#define	ICAMIN_K		gotoblas -> icamin_k
-#define	ICMAX_K			gotoblas -> icmax_k
-#define	ICMIN_K			gotoblas -> icmin_k
-#define	CASUM_K			gotoblas -> casum_k
-#define	CAXPYU_K		gotoblas -> caxpy_k
-#define	CAXPYC_K		gotoblas -> caxpyc_k
-#define	CCOPY_K			gotoblas -> ccopy_k
-#define	CDOTU_K			gotoblas -> cdotu_k
-#define	CDOTC_K			gotoblas -> cdotc_k
-#define	CNRM2_K			gotoblas -> cnrm2_k
-#define	CSCAL_K			gotoblas -> cscal_k
-#define	CSUM_K			gotoblas -> csum_k
-#define	CSWAP_K			gotoblas -> cswap_k
-#define	CROT_K			gotoblas -> csrot_k
+#define	CAMAX_K			openblas_camax_dispatch[openblas_core]->camax_k
+#define	CAMIN_K			openblas_camin_dispatch[openblas_core]->camin_k
+#define	ICAMAX_K		openblas_icamax_dispatch[openblas_core]->icamax_k
+#define	ICAMIN_K		openblas_icamin_dispatch[openblas_core]->icamin_k
+#define	CASUM_K			openblas_casum_dispatch[openblas_core]->casum_k
+#define	CAXPYU_K		openblas_caxpy_dispatch[openblas_core]->caxpy_k
+#define	CAXPYC_K		openblas_caxpyc_dispatch[openblas_core]->caxpyc_k
+#define	CCOPY_K			openblas_ccopy_dispatch[openblas_core]->ccopy_k
+#define	CDOTU_K			openblas_cdotu_dispatch[openblas_core]->cdotu_k
+#define	CDOTC_K			openblas_cdotc_dispatch[openblas_core]->cdotc_k
+#define	CNRM2_K			openblas_cnrm2_dispatch[openblas_core]->cnrm2_k
+#define	CSCAL_K			openblas_cscal_dispatch[openblas_core]->cscal_k
+#define	CSUM_K			openblas_csum_dispatch[openblas_core]->csum_k
+#define	CSWAP_K			openblas_cswap_dispatch[openblas_core]->cswap_k
+#define	CROT_K			openblas_csrot_dispatch[openblas_core]->csrot_k
 
-#define	CGEMV_N			gotoblas -> cgemv_n
-#define	CGEMV_T			gotoblas -> cgemv_t
-#define	CGEMV_R			gotoblas -> cgemv_r
-#define	CGEMV_C			gotoblas -> cgemv_c
-#define	CGEMV_O			gotoblas -> cgemv_o
-#define	CGEMV_U			gotoblas -> cgemv_u
-#define	CGEMV_S			gotoblas -> cgemv_s
-#define	CGEMV_D			gotoblas -> cgemv_d
+#define	CGEMV_N			openblas_cgemv_dispatch[openblas_core]->cgemv_n
+#define	CGEMV_T			openblas_cgemv_dispatch[openblas_core]->cgemv_t
+#define	CGEMV_R			openblas_cgemv_dispatch[openblas_core]->cgemv_r
+#define	CGEMV_C			openblas_cgemv_dispatch[openblas_core]->cgemv_c
+#define	CGEMV_O			openblas_cgemv_dispatch[openblas_core]->cgemv_o
+#define	CGEMV_U			openblas_cgemv_dispatch[openblas_core]->cgemv_u
+#define	CGEMV_S			openblas_cgemv_dispatch[openblas_core]->cgemv_s
+#define	CGEMV_D			openblas_cgemv_dispatch[openblas_core]->cgemv_d
 
-#define	CGERU_K			gotoblas -> cgeru_k
-#define	CGERC_K			gotoblas -> cgerc_k
-#define	CGERV_K			gotoblas -> cgerv_k
-#define	CGERD_K			gotoblas -> cgerd_k
+#define	CGERU_K			openblas_cgeru_dispatch[openblas_core]->cgeru_k
+#define	CGERC_K			openblas_cgerc_dispatch[openblas_core]->cgerc_k
+#define	CGERV_K			openblas_cgerv_dispatch[openblas_core]->cgerv_k
+#define	CGERD_K			openblas_cgerd_dispatch[openblas_core]->cgerd_k
 
-#define CSYMV_U			gotoblas -> csymv_U
-#define CSYMV_L			gotoblas -> csymv_L
-#define CHEMV_U			gotoblas -> chemv_U
-#define CHEMV_L			gotoblas -> chemv_L
-#define CHEMV_V			gotoblas -> chemv_V
-#define CHEMV_M			gotoblas -> chemv_M
+#define CSYMV_U			openblas_csymv_dispatch[openblas_core]->csymv_U
+#define CSYMV_L			openblas_csymv_dispatch[openblas_core]->csymv_L
+#define CHEMV_U			openblas_chemv_dispatch[openblas_core]->chemv_U
+#define CHEMV_L			openblas_chemv_dispatch[openblas_core]->chemv_L
+#define CHEMV_V			openblas_chemv_dispatch[openblas_core]->chemv_V
+#define CHEMV_M			openblas_chemv_dispatch[openblas_core]->chemv_M
 
 #define CSYMV_THREAD_U		csymv_thread_U
 #define CSYMV_THREAD_L		csymv_thread_L
@@ -284,193 +280,194 @@
 #define CHEMV_THREAD_V		chemv_thread_V
 #define CHEMV_THREAD_M		chemv_thread_M
 
-#define	CGEMM_ONCOPY		gotoblas -> cgemm_oncopy
-#define	CGEMM_OTCOPY		gotoblas -> cgemm_otcopy
-#define	CGEMM_INCOPY		gotoblas -> cgemm_incopy
-#define	CGEMM_ITCOPY		gotoblas -> cgemm_itcopy
+#define	CGEMM_ONCOPY		openblas_cgemm_dispatch[openblas_core]->cgemm_oncopy
+#define	CGEMM_OTCOPY		openblas_cgemm_dispatch[openblas_core]->cgemm_otcopy
+#define	CGEMM_INCOPY		openblas_cgemm_dispatch[openblas_core]->cgemm_incopy
+#define	CGEMM_ITCOPY		openblas_cgemm_dispatch[openblas_core]->cgemm_itcopy
 
-#define	CTRMM_OUNUCOPY		gotoblas -> ctrmm_ounucopy
-#define	CTRMM_OUTUCOPY		gotoblas -> ctrmm_outucopy
-#define	CTRMM_OLNUCOPY		gotoblas -> ctrmm_olnucopy
-#define	CTRMM_OLTUCOPY		gotoblas -> ctrmm_oltucopy
-#define	CTRSM_OUNUCOPY		gotoblas -> ctrsm_ounucopy
-#define	CTRSM_OUTUCOPY		gotoblas -> ctrsm_outucopy
-#define	CTRSM_OLNUCOPY		gotoblas -> ctrsm_olnucopy
-#define	CTRSM_OLTUCOPY		gotoblas -> ctrsm_oltucopy
+#define	CTRMM_OUNUCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_ounucopy
+#define	CTRMM_OUTUCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_outucopy
+#define	CTRMM_OLNUCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_olnucopy
+#define	CTRMM_OLTUCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_oltucopy
+#define	CTRSM_OUNUCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_ounucopy
+#define	CTRSM_OUTUCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_outucopy
+#define	CTRSM_OLNUCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_olnucopy
+#define	CTRSM_OLTUCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_oltucopy
 
-#define	CTRMM_IUNUCOPY		gotoblas -> ctrmm_iunucopy
-#define	CTRMM_IUTUCOPY		gotoblas -> ctrmm_iutucopy
-#define	CTRMM_ILNUCOPY		gotoblas -> ctrmm_ilnucopy
-#define	CTRMM_ILTUCOPY		gotoblas -> ctrmm_iltucopy
-#define	CTRSM_IUNUCOPY		gotoblas -> ctrsm_iunucopy
-#define	CTRSM_IUTUCOPY		gotoblas -> ctrsm_iutucopy
-#define	CTRSM_ILNUCOPY		gotoblas -> ctrsm_ilnucopy
-#define	CTRSM_ILTUCOPY		gotoblas -> ctrsm_iltucopy
+#define	CTRMM_IUNUCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_iunucopy
+#define	CTRMM_IUTUCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_iutucopy
+#define	CTRMM_ILNUCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_ilnucopy
+#define	CTRMM_ILTUCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_iltucopy
+#define	CTRSM_IUNUCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_iunucopy
+#define	CTRSM_IUTUCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_iutucopy
+#define	CTRSM_ILNUCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_ilnucopy
+#define	CTRSM_ILTUCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_iltucopy
 
-#define	CTRMM_OUNNCOPY		gotoblas -> ctrmm_ounncopy
-#define	CTRMM_OUTNCOPY		gotoblas -> ctrmm_outncopy
-#define	CTRMM_OLNNCOPY		gotoblas -> ctrmm_olnncopy
-#define	CTRMM_OLTNCOPY		gotoblas -> ctrmm_oltncopy
-#define	CTRSM_OUNNCOPY		gotoblas -> ctrsm_ounncopy
-#define	CTRSM_OUTNCOPY		gotoblas -> ctrsm_outncopy
-#define	CTRSM_OLNNCOPY		gotoblas -> ctrsm_olnncopy
-#define	CTRSM_OLTNCOPY		gotoblas -> ctrsm_oltncopy
+#define	CTRMM_OUNNCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_ounncopy
+#define	CTRMM_OUTNCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_outncopy
+#define	CTRMM_OLNNCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_olnncopy
+#define	CTRMM_OLTNCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_oltncopy
+#define	CTRSM_OUNNCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_ounncopy
+#define	CTRSM_OUTNCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_outncopy
+#define	CTRSM_OLNNCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_olnncopy
+#define	CTRSM_OLTNCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_oltncopy
 
-#define	CTRMM_IUNNCOPY		gotoblas -> ctrmm_iunncopy
-#define	CTRMM_IUTNCOPY		gotoblas -> ctrmm_iutncopy
-#define	CTRMM_ILNNCOPY		gotoblas -> ctrmm_ilnncopy
-#define	CTRMM_ILTNCOPY		gotoblas -> ctrmm_iltncopy
-#define	CTRSM_IUNNCOPY		gotoblas -> ctrsm_iunncopy
-#define	CTRSM_IUTNCOPY		gotoblas -> ctrsm_iutncopy
-#define	CTRSM_ILNNCOPY		gotoblas -> ctrsm_ilnncopy
-#define	CTRSM_ILTNCOPY		gotoblas -> ctrsm_iltncopy
+#define	CTRMM_IUNNCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_iunncopy
+#define	CTRMM_IUTNCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_iutncopy
+#define	CTRMM_ILNNCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_ilnncopy
+#define	CTRMM_ILTNCOPY		openblas_ctrmm_dispatch[openblas_core]->ctrmm_iltncopy
+#define	CTRSM_IUNNCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_iunncopy
+#define	CTRSM_IUTNCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_iutncopy
+#define	CTRSM_ILNNCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_ilnncopy
+#define	CTRSM_ILTNCOPY		openblas_ctrsm_dispatch[openblas_core]->ctrsm_iltncopy
 
-#define	CGEMM_BETA		gotoblas -> cgemm_beta
-#define	CGEMM_KERNEL_N		gotoblas -> cgemm_kernel_n
-#define	CGEMM_KERNEL_L		gotoblas -> cgemm_kernel_l
-#define	CGEMM_KERNEL_R		gotoblas -> cgemm_kernel_r
-#define	CGEMM_KERNEL_B		gotoblas -> cgemm_kernel_b
+#define	CGEMM_BETA		openblas_cgemm_dispatch[openblas_core]->cgemm_beta
+#define	CGEMM_KERNEL_N		openblas_cgemm_dispatch[openblas_core]->cgemm_kernel_n
+#define	CGEMM_KERNEL_L		openblas_cgemm_dispatch[openblas_core]->cgemm_kernel_l
+#define	CGEMM_KERNEL_R		openblas_cgemm_dispatch[openblas_core]->cgemm_kernel_r
+#define	CGEMM_KERNEL_B		openblas_cgemm_dispatch[openblas_core]->cgemm_kernel_b
 
-#define	CTRMM_KERNEL_LN		gotoblas -> ctrmm_kernel_LN
-#define	CTRMM_KERNEL_LT		gotoblas -> ctrmm_kernel_LT
-#define	CTRMM_KERNEL_LR		gotoblas -> ctrmm_kernel_LR
-#define	CTRMM_KERNEL_LC		gotoblas -> ctrmm_kernel_LC
-#define	CTRMM_KERNEL_RN		gotoblas -> ctrmm_kernel_RN
-#define	CTRMM_KERNEL_RT		gotoblas -> ctrmm_kernel_RT
-#define	CTRMM_KERNEL_RR		gotoblas -> ctrmm_kernel_RR
-#define	CTRMM_KERNEL_RC		gotoblas -> ctrmm_kernel_RC
+#define	CTRMM_KERNEL_LN		openblas_ctrmm_dispatch[openblas_core]->ctrmm_kernel_LN
+#define	CTRMM_KERNEL_LT		openblas_ctrmm_dispatch[openblas_core]->ctrmm_kernel_LT
+#define	CTRMM_KERNEL_LR		openblas_ctrmm_dispatch[openblas_core]->ctrmm_kernel_LR
+#define	CTRMM_KERNEL_LC		openblas_ctrmm_dispatch[openblas_core]->ctrmm_kernel_LC
+#define	CTRMM_KERNEL_RN		openblas_ctrmm_dispatch[openblas_core]->ctrmm_kernel_RN
+#define	CTRMM_KERNEL_RT		openblas_ctrmm_dispatch[openblas_core]->ctrmm_kernel_RT
+#define	CTRMM_KERNEL_RR		openblas_ctrmm_dispatch[openblas_core]->ctrmm_kernel_RR
+#define	CTRMM_KERNEL_RC		openblas_ctrmm_dispatch[openblas_core]->ctrmm_kernel_RC
 
-#define	CTRSM_KERNEL_LN		gotoblas -> ctrsm_kernel_LN
-#define	CTRSM_KERNEL_LT		gotoblas -> ctrsm_kernel_LT
-#define	CTRSM_KERNEL_LR		gotoblas -> ctrsm_kernel_LR
-#define	CTRSM_KERNEL_LC		gotoblas -> ctrsm_kernel_LC
-#define	CTRSM_KERNEL_RN		gotoblas -> ctrsm_kernel_RN
-#define	CTRSM_KERNEL_RT		gotoblas -> ctrsm_kernel_RT
-#define	CTRSM_KERNEL_RR		gotoblas -> ctrsm_kernel_RR
-#define	CTRSM_KERNEL_RC		gotoblas -> ctrsm_kernel_RC
+#define	CTRSM_KERNEL_LN		openblas_ctrsm_dispatch[openblas_core]->ctrsm_kernel_LN
+#define	CTRSM_KERNEL_LT		openblas_ctrsm_dispatch[openblas_core]->ctrsm_kernel_LT
+#define	CTRSM_KERNEL_LR		openblas_ctrsm_dispatch[openblas_core]->ctrsm_kernel_LR
+#define	CTRSM_KERNEL_LC		openblas_ctrsm_dispatch[openblas_core]->ctrsm_kernel_LC
+#define	CTRSM_KERNEL_RN		openblas_ctrsm_dispatch[openblas_core]->ctrsm_kernel_RN
+#define	CTRSM_KERNEL_RT		openblas_ctrsm_dispatch[openblas_core]->ctrsm_kernel_RT
+#define	CTRSM_KERNEL_RR		openblas_ctrsm_dispatch[openblas_core]->ctrsm_kernel_RR
+#define	CTRSM_KERNEL_RC		openblas_ctrsm_dispatch[openblas_core]->ctrsm_kernel_RC
 
-#define	CSYMM_IUTCOPY		gotoblas -> csymm_iutcopy
-#define	CSYMM_ILTCOPY		gotoblas -> csymm_iltcopy
-#define	CSYMM_OUTCOPY		gotoblas -> csymm_outcopy
-#define	CSYMM_OLTCOPY		gotoblas -> csymm_oltcopy
+#define	CSYMM_IUTCOPY		openblas_csymm_dispatch[openblas_core]->csymm_iutcopy
+#define	CSYMM_ILTCOPY		openblas_csymm_dispatch[openblas_core]->csymm_iltcopy
+#define	CSYMM_OUTCOPY		openblas_csymm_dispatch[openblas_core]->csymm_outcopy
+#define	CSYMM_OLTCOPY		openblas_csymm_dispatch[openblas_core]->csymm_oltcopy
 
-#define	CHEMM_OUTCOPY		gotoblas -> chemm_outcopy
-#define	CHEMM_OLTCOPY		gotoblas -> chemm_oltcopy
-#define	CHEMM_IUTCOPY		gotoblas -> chemm_iutcopy
-#define	CHEMM_ILTCOPY		gotoblas -> chemm_iltcopy
+#define	CHEMM_OUTCOPY		openblas_chemm_dispatch[openblas_core]->chemm_outcopy
+#define	CHEMM_OLTCOPY		openblas_chemm_dispatch[openblas_core]->chemm_oltcopy
+#define	CHEMM_IUTCOPY		openblas_chemm_dispatch[openblas_core]->chemm_iutcopy
+#define	CHEMM_ILTCOPY		openblas_chemm_dispatch[openblas_core]->chemm_iltcopy
 
-#define	CGEMM3M_ONCOPYB		gotoblas -> cgemm3m_oncopyb
-#define	CGEMM3M_ONCOPYR		gotoblas -> cgemm3m_oncopyr
-#define	CGEMM3M_ONCOPYI		gotoblas -> cgemm3m_oncopyi
-#define	CGEMM3M_OTCOPYB		gotoblas -> cgemm3m_otcopyb
-#define	CGEMM3M_OTCOPYR		gotoblas -> cgemm3m_otcopyr
-#define	CGEMM3M_OTCOPYI		gotoblas -> cgemm3m_otcopyi
+#define	CGEMM3M_ONCOPYB		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_oncopyb
+#define	CGEMM3M_ONCOPYR		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_oncopyr
+#define	CGEMM3M_ONCOPYI		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_oncopyi
+#define	CGEMM3M_OTCOPYB		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_otcopyb
+#define	CGEMM3M_OTCOPYR		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_otcopyr
+#define	CGEMM3M_OTCOPYI		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_otcopyi
 
-#define	CGEMM3M_INCOPYB		gotoblas -> cgemm3m_incopyb
-#define	CGEMM3M_INCOPYR		gotoblas -> cgemm3m_incopyr
-#define	CGEMM3M_INCOPYI		gotoblas -> cgemm3m_incopyi
-#define	CGEMM3M_ITCOPYB		gotoblas -> cgemm3m_itcopyb
-#define	CGEMM3M_ITCOPYR		gotoblas -> cgemm3m_itcopyr
-#define	CGEMM3M_ITCOPYI		gotoblas -> cgemm3m_itcopyi
+#define	CGEMM3M_INCOPYB		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_incopyb
+#define	CGEMM3M_INCOPYR		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_incopyr
+#define	CGEMM3M_INCOPYI		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_incopyi
+#define	CGEMM3M_ITCOPYB		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_itcopyb
+#define	CGEMM3M_ITCOPYR		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_itcopyr
+#define	CGEMM3M_ITCOPYI		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_itcopyi
 
-#define	CSYMM3M_ILCOPYB		gotoblas -> csymm3m_ilcopyb
-#define	CSYMM3M_IUCOPYB		gotoblas -> csymm3m_iucopyb
-#define	CSYMM3M_ILCOPYR		gotoblas -> csymm3m_ilcopyr
-#define	CSYMM3M_IUCOPYR		gotoblas -> csymm3m_iucopyr
-#define	CSYMM3M_ILCOPYI		gotoblas -> csymm3m_ilcopyi
-#define	CSYMM3M_IUCOPYI		gotoblas -> csymm3m_iucopyi
+#define	CSYMM3M_ILCOPYB		openblas_csymm3m_dispatch[openblas_core]->csymm3m_ilcopyb
+#define	CSYMM3M_IUCOPYB		openblas_csymm3m_dispatch[openblas_core]->csymm3m_iucopyb
+#define	CSYMM3M_ILCOPYR		openblas_csymm3m_dispatch[openblas_core]->csymm3m_ilcopyr
+#define	CSYMM3M_IUCOPYR		openblas_csymm3m_dispatch[openblas_core]->csymm3m_iucopyr
+#define	CSYMM3M_ILCOPYI		openblas_csymm3m_dispatch[openblas_core]->csymm3m_ilcopyi
+#define	CSYMM3M_IUCOPYI		openblas_csymm3m_dispatch[openblas_core]->csymm3m_iucopyi
 
-#define	CSYMM3M_OLCOPYB		gotoblas -> csymm3m_olcopyb
-#define	CSYMM3M_OUCOPYB		gotoblas -> csymm3m_oucopyb
-#define	CSYMM3M_OLCOPYR		gotoblas -> csymm3m_olcopyr
-#define	CSYMM3M_OUCOPYR		gotoblas -> csymm3m_oucopyr
-#define	CSYMM3M_OLCOPYI		gotoblas -> csymm3m_olcopyi
-#define	CSYMM3M_OUCOPYI		gotoblas -> csymm3m_oucopyi
+#define	CSYMM3M_OLCOPYB		openblas_csymm3m_dispatch[openblas_core]->csymm3m_olcopyb
+#define	CSYMM3M_OUCOPYB		openblas_csymm3m_dispatch[openblas_core]->csymm3m_oucopyb
+#define	CSYMM3M_OLCOPYR		openblas_csymm3m_dispatch[openblas_core]->csymm3m_olcopyr
+#define	CSYMM3M_OUCOPYR		openblas_csymm3m_dispatch[openblas_core]->csymm3m_oucopyr
+#define	CSYMM3M_OLCOPYI		openblas_csymm3m_dispatch[openblas_core]->csymm3m_olcopyi
+#define	CSYMM3M_OUCOPYI		openblas_csymm3m_dispatch[openblas_core]->csymm3m_oucopyi
 
-#define	CHEMM3M_ILCOPYB		gotoblas -> chemm3m_ilcopyb
-#define	CHEMM3M_IUCOPYB		gotoblas -> chemm3m_iucopyb
-#define	CHEMM3M_ILCOPYR		gotoblas -> chemm3m_ilcopyr
-#define	CHEMM3M_IUCOPYR		gotoblas -> chemm3m_iucopyr
-#define	CHEMM3M_ILCOPYI		gotoblas -> chemm3m_ilcopyi
-#define	CHEMM3M_IUCOPYI		gotoblas -> chemm3m_iucopyi
+#define	CHEMM3M_ILCOPYB		openblas_chemm3m_dispatch[openblas_core]->chemm3m_ilcopyb
+#define	CHEMM3M_IUCOPYB		openblas_chemm3m_dispatch[openblas_core]->chemm3m_iucopyb
+#define	CHEMM3M_ILCOPYR		openblas_chemm3m_dispatch[openblas_core]->chemm3m_ilcopyr
+#define	CHEMM3M_IUCOPYR		openblas_chemm3m_dispatch[openblas_core]->chemm3m_iucopyr
+#define	CHEMM3M_ILCOPYI		openblas_chemm3m_dispatch[openblas_core]->chemm3m_ilcopyi
+#define	CHEMM3M_IUCOPYI		openblas_chemm3m_dispatch[openblas_core]->chemm3m_iucopyi
 
-#define	CHEMM3M_OLCOPYB		gotoblas -> chemm3m_olcopyb
-#define	CHEMM3M_OUCOPYB		gotoblas -> chemm3m_oucopyb
-#define	CHEMM3M_OLCOPYR		gotoblas -> chemm3m_olcopyr
-#define	CHEMM3M_OUCOPYR		gotoblas -> chemm3m_oucopyr
-#define	CHEMM3M_OLCOPYI		gotoblas -> chemm3m_olcopyi
-#define	CHEMM3M_OUCOPYI		gotoblas -> chemm3m_oucopyi
+#define	CHEMM3M_OLCOPYB		openblas_chemm3m_dispatch[openblas_core]->chemm3m_olcopyb
+#define	CHEMM3M_OUCOPYB		openblas_chemm3m_dispatch[openblas_core]->chemm3m_oucopyb
+#define	CHEMM3M_OLCOPYR		openblas_chemm3m_dispatch[openblas_core]->chemm3m_olcopyr
+#define	CHEMM3M_OUCOPYR		openblas_chemm3m_dispatch[openblas_core]->chemm3m_oucopyr
+#define	CHEMM3M_OLCOPYI		openblas_chemm3m_dispatch[openblas_core]->chemm3m_olcopyi
+#define	CHEMM3M_OUCOPYI		openblas_chemm3m_dispatch[openblas_core]->chemm3m_oucopyi
 
-#define	CGEMM3M_KERNEL		gotoblas -> cgemm3m_kernel
+#define	CGEMM3M_KERNEL		openblas_cgemm3m_dispatch[openblas_core]->cgemm3m_kernel
 
-#define CNEG_TCOPY		gotoblas -> cneg_tcopy
-#define CLASWP_NCOPY		gotoblas -> claswp_ncopy
+#define CNEG_TCOPY		openblas_cneg_dispatch[openblas_core]->cneg_tcopy
+#define CLASWP_NCOPY		openblas_claswp_dispatch[openblas_core]->claswp_ncopy
 
-#define CAXPBY_K                gotoblas -> caxpby_k
+#define CAXPBY_K                openblas_caxpby_dispatch[openblas_core]->caxpby_k
 
-#define COMATCOPY_K_CN          gotoblas -> comatcopy_k_cn
-#define COMATCOPY_K_RN          gotoblas -> comatcopy_k_rn
-#define COMATCOPY_K_CT          gotoblas -> comatcopy_k_ct
-#define COMATCOPY_K_RT          gotoblas -> comatcopy_k_rt
-#define COMATCOPY_K_CNC         gotoblas -> comatcopy_k_cnc
-#define COMATCOPY_K_RNC         gotoblas -> comatcopy_k_rnc
-#define COMATCOPY_K_CTC         gotoblas -> comatcopy_k_ctc
-#define COMATCOPY_K_RTC         gotoblas -> comatcopy_k_rtc
+#define COMATCOPY_K_CN          openblas_comatcopy_dispatch[openblas_core]->comatcopy_k_cn
+#define COMATCOPY_K_RN          openblas_comatcopy_dispatch[openblas_core]->comatcopy_k_rn
+#define COMATCOPY_K_CT          openblas_comatcopy_dispatch[openblas_core]->comatcopy_k_ct
+#define COMATCOPY_K_RT          openblas_comatcopy_dispatch[openblas_core]->comatcopy_k_rt
+#define COMATCOPY_K_CNC         openblas_comatcopy_dispatch[openblas_core]->comatcopy_k_cnc
+#define COMATCOPY_K_RNC         openblas_comatcopy_dispatch[openblas_core]->comatcopy_k_rnc
+#define COMATCOPY_K_CTC         openblas_comatcopy_dispatch[openblas_core]->comatcopy_k_ctc
+#define COMATCOPY_K_RTC         openblas_comatcopy_dispatch[openblas_core]->comatcopy_k_rtc
 
-#define CIMATCOPY_K_CN          gotoblas -> cimatcopy_k_cn
-#define CIMATCOPY_K_RN          gotoblas -> cimatcopy_k_rn
-#define CIMATCOPY_K_CT          gotoblas -> cimatcopy_k_ct
-#define CIMATCOPY_K_RT          gotoblas -> cimatcopy_k_rt
-#define CIMATCOPY_K_CNC         gotoblas -> cimatcopy_k_cnc
-#define CIMATCOPY_K_RNC         gotoblas -> cimatcopy_k_rnc
-#define CIMATCOPY_K_CTC         gotoblas -> cimatcopy_k_ctc
-#define CIMATCOPY_K_RTC         gotoblas -> cimatcopy_k_rtc
+#define CIMATCOPY_K_CN          openblas_cimatcopy_dispatch[openblas_core]->cimatcopy_k_cn
+#define CIMATCOPY_K_RN          openblas_cimatcopy_dispatch[openblas_core]->cimatcopy_k_rn
+#define CIMATCOPY_K_CT          openblas_cimatcopy_dispatch[openblas_core]->cimatcopy_k_ct
+#define CIMATCOPY_K_RT          openblas_cimatcopy_dispatch[openblas_core]->cimatcopy_k_rt
+#define CIMATCOPY_K_CNC         openblas_cimatcopy_dispatch[openblas_core]->cimatcopy_k_cnc
+#define CIMATCOPY_K_RNC         openblas_cimatcopy_dispatch[openblas_core]->cimatcopy_k_rnc
+#define CIMATCOPY_K_CTC         openblas_cimatcopy_dispatch[openblas_core]->cimatcopy_k_ctc
+#define CIMATCOPY_K_RTC         openblas_cimatcopy_dispatch[openblas_core]->cimatcopy_k_rtc
 
-#define CGEADD_K                gotoblas -> cgeadd_k 
+#define CGEADD_K                openblas_cgeadd_dispatch[openblas_core]->cgeadd_k 
 
-#define CGEMM_SMALL_MATRIX_PERMIT	gotoblas -> cgemm_small_matrix_permit
+#define CGEMM_SMALL_MATRIX_PERMIT	openblas_cgemm_dispatch[openblas_core]->cgemm_small_matrix_permit
 
 #endif
 
-#define CGEMM_SMALL_KERNEL_NN		FUNC_OFFSET(cgemm_small_kernel_nn)
-#define CGEMM_SMALL_KERNEL_NT		FUNC_OFFSET(cgemm_small_kernel_nt)
-#define CGEMM_SMALL_KERNEL_NR		FUNC_OFFSET(cgemm_small_kernel_nr)
-#define CGEMM_SMALL_KERNEL_NC		FUNC_OFFSET(cgemm_small_kernel_nc)
+#define	CGEMM_SMALL_KERNEL_BASE	OB_SLOT_BASE(cgemm)
+#define CGEMM_SMALL_KERNEL_NN		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_nn)
+#define CGEMM_SMALL_KERNEL_NT		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_nt)
+#define CGEMM_SMALL_KERNEL_NR		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_nr)
+#define CGEMM_SMALL_KERNEL_NC		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_nc)
 
-#define CGEMM_SMALL_KERNEL_TN		FUNC_OFFSET(cgemm_small_kernel_tn)
-#define CGEMM_SMALL_KERNEL_TT		FUNC_OFFSET(cgemm_small_kernel_tt)
-#define CGEMM_SMALL_KERNEL_TR		FUNC_OFFSET(cgemm_small_kernel_tr)
-#define CGEMM_SMALL_KERNEL_TC		FUNC_OFFSET(cgemm_small_kernel_tc)
+#define CGEMM_SMALL_KERNEL_TN		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_tn)
+#define CGEMM_SMALL_KERNEL_TT		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_tt)
+#define CGEMM_SMALL_KERNEL_TR		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_tr)
+#define CGEMM_SMALL_KERNEL_TC		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_tc)
 
-#define CGEMM_SMALL_KERNEL_RN		FUNC_OFFSET(cgemm_small_kernel_rn)
-#define CGEMM_SMALL_KERNEL_RT		FUNC_OFFSET(cgemm_small_kernel_rt)
-#define CGEMM_SMALL_KERNEL_RR		FUNC_OFFSET(cgemm_small_kernel_rr)
-#define CGEMM_SMALL_KERNEL_RC		FUNC_OFFSET(cgemm_small_kernel_rc)
+#define CGEMM_SMALL_KERNEL_RN		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_rn)
+#define CGEMM_SMALL_KERNEL_RT		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_rt)
+#define CGEMM_SMALL_KERNEL_RR		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_rr)
+#define CGEMM_SMALL_KERNEL_RC		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_rc)
 
-#define CGEMM_SMALL_KERNEL_CN		FUNC_OFFSET(cgemm_small_kernel_cn)
-#define CGEMM_SMALL_KERNEL_CT		FUNC_OFFSET(cgemm_small_kernel_ct)
-#define CGEMM_SMALL_KERNEL_CR		FUNC_OFFSET(cgemm_small_kernel_cr)
-#define CGEMM_SMALL_KERNEL_CC		FUNC_OFFSET(cgemm_small_kernel_cc)
+#define CGEMM_SMALL_KERNEL_CN		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_cn)
+#define CGEMM_SMALL_KERNEL_CT		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_ct)
+#define CGEMM_SMALL_KERNEL_CR		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_cr)
+#define CGEMM_SMALL_KERNEL_CC		OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_cc)
 
-#define CGEMM_SMALL_KERNEL_B0_NN	FUNC_OFFSET(cgemm_small_kernel_b0_nn)
-#define CGEMM_SMALL_KERNEL_B0_NT	FUNC_OFFSET(cgemm_small_kernel_b0_nt)
-#define CGEMM_SMALL_KERNEL_B0_NR	FUNC_OFFSET(cgemm_small_kernel_b0_nr)
-#define CGEMM_SMALL_KERNEL_B0_NC	FUNC_OFFSET(cgemm_small_kernel_b0_nc)
+#define CGEMM_SMALL_KERNEL_B0_NN	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_nn)
+#define CGEMM_SMALL_KERNEL_B0_NT	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_nt)
+#define CGEMM_SMALL_KERNEL_B0_NR	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_nr)
+#define CGEMM_SMALL_KERNEL_B0_NC	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_nc)
 
-#define CGEMM_SMALL_KERNEL_B0_TN	FUNC_OFFSET(cgemm_small_kernel_b0_tn)
-#define CGEMM_SMALL_KERNEL_B0_TT	FUNC_OFFSET(cgemm_small_kernel_b0_tt)
-#define CGEMM_SMALL_KERNEL_B0_TR	FUNC_OFFSET(cgemm_small_kernel_b0_tr)
-#define CGEMM_SMALL_KERNEL_B0_TC	FUNC_OFFSET(cgemm_small_kernel_b0_tc)
+#define CGEMM_SMALL_KERNEL_B0_TN	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_tn)
+#define CGEMM_SMALL_KERNEL_B0_TT	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_tt)
+#define CGEMM_SMALL_KERNEL_B0_TR	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_tr)
+#define CGEMM_SMALL_KERNEL_B0_TC	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_tc)
 
-#define CGEMM_SMALL_KERNEL_B0_RN	FUNC_OFFSET(cgemm_small_kernel_b0_rn)
-#define CGEMM_SMALL_KERNEL_B0_RT	FUNC_OFFSET(cgemm_small_kernel_b0_rt)
-#define CGEMM_SMALL_KERNEL_B0_RR	FUNC_OFFSET(cgemm_small_kernel_b0_rr)
-#define CGEMM_SMALL_KERNEL_B0_RC	FUNC_OFFSET(cgemm_small_kernel_b0_rc)
+#define CGEMM_SMALL_KERNEL_B0_RN	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_rn)
+#define CGEMM_SMALL_KERNEL_B0_RT	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_rt)
+#define CGEMM_SMALL_KERNEL_B0_RR	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_rr)
+#define CGEMM_SMALL_KERNEL_B0_RC	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_rc)
 
-#define CGEMM_SMALL_KERNEL_B0_CN	FUNC_OFFSET(cgemm_small_kernel_b0_cn)
-#define CGEMM_SMALL_KERNEL_B0_CT	FUNC_OFFSET(cgemm_small_kernel_b0_ct)
-#define CGEMM_SMALL_KERNEL_B0_CR	FUNC_OFFSET(cgemm_small_kernel_b0_cr)
-#define CGEMM_SMALL_KERNEL_B0_CC	FUNC_OFFSET(cgemm_small_kernel_b0_cc)
+#define CGEMM_SMALL_KERNEL_B0_CN	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_cn)
+#define CGEMM_SMALL_KERNEL_B0_CT	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_ct)
+#define CGEMM_SMALL_KERNEL_B0_CR	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_cr)
+#define CGEMM_SMALL_KERNEL_B0_CC	OB_SLOT_OFFSET(cgemm, cgemm_small_kernel_b0_cc)
 
 
 #define	CGEMM_NN		cgemm_nn

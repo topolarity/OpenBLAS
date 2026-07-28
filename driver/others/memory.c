@@ -212,7 +212,12 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #ifdef DYNAMIC_ARCH
-gotoblas_t *gotoblas = NULL;
+/* Index of the running core within DYNAMIC_CORE, or -1 before dispatch has
+   been initialised.  Defined here rather than in dispatch.c on purpose: the
+   accessor macros reference it from every BLAS entry point, and having it
+   live in this object is what pulls in the CONSTRUCTOR below on a static
+   link (gotoblas, which it replaces, was defined here for the same reason). */
+int openblas_core = -1;
 #endif
 extern void openblas_warning(int verbose, const char * msg);
 
@@ -1790,7 +1795,12 @@ inline int atoi(const char *str) { return 0; }
 #endif
 
 #ifdef DYNAMIC_ARCH
-gotoblas_t *gotoblas = NULL;
+/* Index of the running core within DYNAMIC_CORE, or -1 before dispatch has
+   been initialised.  Defined here rather than in dispatch.c on purpose: the
+   accessor macros reference it from every BLAS entry point, and having it
+   live in this object is what pulls in the CONSTRUCTOR below on a static
+   link (gotoblas, which it replaces, was defined here for the same reason). */
+int openblas_core = -1;
 #endif
 extern void openblas_warning(int verbose, const char * msg);
 
@@ -3023,7 +3033,7 @@ void *blas_memory_alloc(int procpos){
 
     if (memory_initialized == 1) {
 
-      if (!gotoblas) gotoblas_dynamic_init();
+      if (openblas_core < 0) gotoblas_dynamic_init();
 
       memory_initialized = 2;
     }

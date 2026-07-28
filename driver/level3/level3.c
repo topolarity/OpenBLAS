@@ -173,9 +173,9 @@
 #if defined(BUILD_BFLOAT16)
 #if defined(DYNAMIC_ARCH)
   #if defined(BGEMM)
-    #define BFLOAT16_ALIGN_K gotoblas->bgemm_align_k
+    #define BFLOAT16_ALIGN_K openblas_params_tab[openblas_core]->bgemm_align_k
   #else
-    #define BFLOAT16_ALIGN_K gotoblas->sbgemm_align_k
+    #define BFLOAT16_ALIGN_K openblas_params_tab[openblas_core]->sbgemm_align_k
   #endif
 #else
   #if defined(BGEMM)

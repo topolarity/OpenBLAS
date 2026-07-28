@@ -60,8 +60,8 @@
 #endif
 
 #ifdef DYNAMIC_ARCH
-#define DIVIDE_LIMIT gotoblas->divide_limit
-#define DIVIDE_RATE gotoblas->divide_rate
+#define DIVIDE_LIMIT openblas_params_tab[openblas_core]->divide_limit
+#define DIVIDE_RATE openblas_params_tab[openblas_core]->divide_rate
 #else
 #define DIVIDE_LIMIT GEMM_DIVIDE_LIMIT
 #define DIVIDE_RATE GEMM_DIVIDE_RATE

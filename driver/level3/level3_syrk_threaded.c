@@ -528,7 +528,7 @@ int CNAME(blas_arg_t *args, BLASLONG *range_m, BLASLONG *range_n, FLOAT *sa, FLO
   double dnum, di, dinum;
 
 #if defined(DYNAMIC_ARCH)
-  int switch_ratio = gotoblas->switch_ratio;
+  int switch_ratio = openblas_params_tab[openblas_core]->switch_ratio;
 #else
   int switch_ratio = SWITCH_RATIO;
 #endif

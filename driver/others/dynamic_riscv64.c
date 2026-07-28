@@ -111,13 +111,9 @@ struct riscv_hwprobe {
 
 unsigned detect_riscv64_get_vlenb(void);
 uint64_t detect_riscv64_rvv100(void);
-
-extern gotoblas_t gotoblas_RISCV64_GENERIC;
 #if !defined(DYNAMIC_LIST) || defined(DYN_RISCV64_ZVL256B)
-extern gotoblas_t gotoblas_RISCV64_ZVL256B;
 #endif
 #if !defined(DYNAMIC_LIST) || defined(DYN_RISCV64_ZVL128B)
-extern gotoblas_t gotoblas_RISCV64_ZVL128B;
 #endif
 
 #define CPU_GENERIC         0
@@ -136,26 +132,26 @@ extern void openblas_warning(int verbose, const char* msg);
 
 char* gotoblas_corename(void) {
 #if !defined(DYNAMIC_LIST) || defined(DYN_RISCV64_ZVL256B)
-	if (gotoblas == &gotoblas_RISCV64_ZVL256B)
+	if (openblas_core == OPENBLAS_CORE_RISCV64_ZVL256B)
 		return cpuname[CPU_RISCV64_ZVL256B];
 #endif
 #if !defined(DYNAMIC_LIST) || defined(DYN_RISCV64_ZVL128B)
-	if (gotoblas == &gotoblas_RISCV64_ZVL128B)
+	if (openblas_core == OPENBLAS_CORE_RISCV64_ZVL128B)
 		return cpuname[CPU_RISCV64_ZVL128B];
 #endif
-	if (gotoblas == &gotoblas_RISCV64_GENERIC)
+	if (openblas_core == OPENBLAS_CORE_RISCV64_GENERIC)
 		return cpuname[CPU_GENERIC];
 
 	return "unknown";
 }
 
-static gotoblas_t* get_coretype(void) {
+static int get_coretype(void) {
 	uint64_t vector_mask;
 	unsigned vlenb = 0;
 	char coremsg[128];
 
 #if !defined(OS_LINUX)
-	return NULL;
+	return -1;
 #else
 
 	/*
@@ -178,22 +174,22 @@ static gotoblas_t* get_coretype(void) {
 		vector_mask = RISCV_HWPROBE_IMA_V;
 #endif
 		if ((pairs[0].value & vector_mask) != vector_mask)
-			return NULL;
+			return -1;
 	} else {
 #if defined(BUILD_HFLOAT16)
 		snprintf(coremsg, sizeof(coremsg), "Cpu support for Zfh+Zvfh extensions required due to BUILD_HFLOAT16=1\n");
 		openblas_warning(1, coremsg);
-		return NULL;
+		return -1;
 #elif defined(BUILD_BFLOAT16)
 		snprintf(coremsg, sizeof(coremsg), "Cpu support for Zvfbfwma extensions required due to BUILD_BFLOAT16=1\n");
 		openblas_warning(1, coremsg);
-		return NULL;
+		return -1;
 #else
 		if (!(getauxval(AT_HWCAP) & DETECT_RISCV64_HWCAP_ISA_V))
-			return NULL;
+			return -1;
 
 		if (!detect_riscv64_rvv100())
-			return NULL;
+			return -1;
 #endif
 	}
 
@@ -205,54 +201,54 @@ static gotoblas_t* get_coretype(void) {
 	vlenb = detect_riscv64_get_vlenb();
 
 	if (vlenb < 16)
-		return NULL;
+		return -1;
 #if !defined(DYNAMIC_LIST) || defined(DYN_RISCV64_ZVL256B)
 	if (vlenb >= 32)
-		return &gotoblas_RISCV64_ZVL256B;
+		return OPENBLAS_CORE_RISCV64_ZVL256B;
 #endif
 
 #if !defined(DYNAMIC_LIST) || defined(DYN_RISCV64_ZVL128B)
-	return &gotoblas_RISCV64_ZVL128B;
+	return OPENBLAS_CORE_RISCV64_ZVL128B;
 #else
-	return NULL;
+	return -1;
 #endif
 
 #endif  // !defined(OS_LINUX)
 }
 
-static gotoblas_t* force_coretype(char* coretype) {
+static int force_coretype(char* coretype) {
 	size_t i;
 	char message[128];
 
 	for (i = 0; i < NUM_CORETYPES && strcasecmp(coretype, cpuname[i]); i++);
 
 	if (i == CPU_GENERIC)
-		return &gotoblas_RISCV64_GENERIC;
+		return OPENBLAS_CORE_RISCV64_GENERIC;
 
 	if (i == CPU_RISCV64_ZVL256B) {
 #if !defined(DYNAMIC_LIST) || defined(DYN_RISCV64_ZVL256B)
-		return &gotoblas_RISCV64_ZVL256B;
+		return OPENBLAS_CORE_RISCV64_ZVL256B;
 #else
 		openblas_warning(1,
 				 "riscv64_zvl256b support not compiled in\n");
-		return NULL;
+		return -1;
 #endif
 	}
 
 	if (i == CPU_RISCV64_ZVL128B) {
 #if !defined(DYNAMIC_LIST) || defined(DYN_RISCV64_ZVL128B)
-		return &gotoblas_RISCV64_ZVL128B;
+		return OPENBLAS_CORE_RISCV64_ZVL128B;
 #else
 		openblas_warning(1,
 				 "riscv64_zvl128b support not compiled in\n");
-		return NULL;
+		return -1;
 #endif
 	}
 
 	snprintf(message, sizeof(message), "Core not found: %s\n", coretype);
 	openblas_warning(1, message);
 
-	return NULL;
+	return -1;
 }
 
 void gotoblas_dynamic_init(void) {
@@ -260,25 +256,25 @@ void gotoblas_dynamic_init(void) {
 	char coremsg[128];
 	char* p;
 
-	if (gotoblas) return;
+	if (openblas_core >= 0) return;
 
 	p = getenv("OPENBLAS_CORETYPE");
 	if (p)
-		gotoblas = force_coretype(p);
+		openblas_core = force_coretype(p);
 	else
-		gotoblas = get_coretype();
+		openblas_core = get_coretype();
 
-	if (!gotoblas) {
+	if (openblas_core < 0) {
 		snprintf(coremsg, sizeof(coremsg), "Falling back to generic riscv64 core\n");
 		openblas_warning(1, coremsg);
-		gotoblas = &gotoblas_RISCV64_GENERIC;
+		openblas_core = OPENBLAS_CORE_RISCV64_GENERIC;
 	}
 
-	if (gotoblas->init) {
+	if (openblas_params_tab[openblas_core]->init) {
 		snprintf(coremsg, sizeof(coremsg), "Core: %s\n",
 			 gotoblas_corename());
 		openblas_warning(2, coremsg);
-		gotoblas->init();
+		openblas_params_tab[openblas_core]->init();
 		return;
 	}
 
@@ -287,5 +283,5 @@ void gotoblas_dynamic_init(void) {
 }
 
 void gotoblas_dynamic_quit(void) {
-	gotoblas = NULL;
+	openblas_core = -1;
 }

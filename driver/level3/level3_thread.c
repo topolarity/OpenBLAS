@@ -49,7 +49,7 @@
 
 #ifdef DYNAMIC_ARCH
 #undef GEMM_PREFERRED_SIZE
-#define GEMM_PREFERRED_SIZE gotoblas->preferred_size
+#define GEMM_PREFERRED_SIZE openblas_params_tab[openblas_core]->preferred_size
 #endif
 #ifndef GEMM_PREFERRED_SIZE
 #define GEMM_PREFERRED_SIZE 1
@@ -229,9 +229,9 @@ typedef struct {
 #if defined(BUILD_BFLOAT16)
 #if defined(DYNAMIC_ARCH)
   #if defined(BGEMM)
-    #define BFLOAT16_ALIGN_K gotoblas->bgemm_align_k
+    #define BFLOAT16_ALIGN_K openblas_params_tab[openblas_core]->bgemm_align_k
   #else
-    #define BFLOAT16_ALIGN_K gotoblas->sbgemm_align_k
+    #define BFLOAT16_ALIGN_K openblas_params_tab[openblas_core]->sbgemm_align_k
   #endif
 #else
   #if defined(BGEMM)
@@ -636,7 +636,7 @@ static int gemm_driver(blas_arg_t *args, BLASLONG *range_m, BLASLONG
   BLASLONG m, n, n_from, n_to;
   int mode;
 #if defined(DYNAMIC_ARCH)
-  int switch_ratio = gotoblas->switch_ratio;
+  int switch_ratio = openblas_params_tab[openblas_core]->switch_ratio;
 #else
   int switch_ratio = SWITCH_RATIO;
 #endif
@@ -816,7 +816,7 @@ int CNAME(blas_arg_t *args, BLASLONG *range_m, BLASLONG *range_n, IFLOAT *sa, IF
   BLASLONG n = args -> n;
   BLASLONG nthreads_m, nthreads_n;
 #if defined(DYNAMIC_ARCH)
-  int switch_ratio = gotoblas->switch_ratio;
+  int switch_ratio = openblas_params_tab[openblas_core]->switch_ratio;
 #else
   int switch_ratio = SWITCH_RATIO;
 #endif

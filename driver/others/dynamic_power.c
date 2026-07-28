@@ -1,13 +1,8 @@
 
 #include "common.h"
-
-extern gotoblas_t gotoblas_POWER6;
-extern gotoblas_t gotoblas_POWER8;
 #if ((!defined __GNUC__) || ( __GNUC__ >= 6)) || defined(__clang__)
-extern gotoblas_t gotoblas_POWER9;
 #endif
 #ifdef HAVE_P10_SUPPORT
-extern gotoblas_t gotoblas_POWER10;
 #endif
 
 extern void openblas_warning(int verbose, const char *msg);
@@ -24,14 +19,14 @@ static char *corename[] = {
 
 char *gotoblas_corename(void) {
 #ifndef C_PGI
-	if (gotoblas == &gotoblas_POWER6)	return corename[1];
+	if (openblas_core == OPENBLAS_CORE_POWER6)	return corename[1];
 #endif
-	if (gotoblas == &gotoblas_POWER8)	return corename[2];
+	if (openblas_core == OPENBLAS_CORE_POWER8)	return corename[2];
 #if ((!defined __GNUC__) || ( __GNUC__ >= 6)) || defined(__clang__)
-	if (gotoblas == &gotoblas_POWER9)	return corename[3];
+	if (openblas_core == OPENBLAS_CORE_POWER9)	return corename[3];
 #endif
 #ifdef HAVE_P10_SUPPORT
-	if (gotoblas == &gotoblas_POWER10)	return corename[4];
+	if (openblas_core == OPENBLAS_CORE_POWER10)	return corename[4];
 #endif
 	return corename[0];
 }
@@ -259,17 +254,17 @@ static int __builtin_cpu_supports(const char *arg)
 #endif
 #endif
 
-static gotoblas_t *get_coretype(void) {
+static int get_coretype(void) {
 
 #ifndef C_PGI
 	if (__builtin_cpu_is("power6") || __builtin_cpu_is("power6x"))
-		return &gotoblas_POWER6;
+		return OPENBLAS_CORE_POWER6;
 #endif
 	if (__builtin_cpu_is("power8"))
-		return &gotoblas_POWER8;
+		return OPENBLAS_CORE_POWER8;
 #if ((!defined __GNUC__) || ( __GNUC__ >= 6)) || defined(__clang__)
 	if (__builtin_cpu_is("power9"))
-		return &gotoblas_POWER9;
+		return OPENBLAS_CORE_POWER9;
 #endif
 #ifdef HAVE_P10_SUPPORT
 #if defined(_AIX) || defined(__clang__)
@@ -277,17 +272,17 @@ static gotoblas_t *get_coretype(void) {
 #else
 	if (__builtin_cpu_supports ("arch_3_1") && __builtin_cpu_supports ("mma"))
 #endif
-		return &gotoblas_POWER10;
+		return OPENBLAS_CORE_POWER10;
 #endif
 	/* Fall back to the POWER9 implementation if the toolchain is too old or the MMA feature is not set */
 #if (!defined __GNUC__) || ( __GNUC__ >= 11) || (__GNUC__ == 10 && __GNUC_MINOR__ >= 2)
 	if (__builtin_cpu_is("power10"))
-		return &gotoblas_POWER9;
+		return OPENBLAS_CORE_POWER9;
 #endif
-	return NULL;
+	return -1;
 }
 
-static gotoblas_t *force_coretype(char * coretype) {
+static int force_coretype(char * coretype) {
 
 	int i ;
 	int found = -1;
@@ -305,16 +300,16 @@ static gotoblas_t *force_coretype(char * coretype) {
 	switch (found)
 	{
 #ifndef C_PGI
-	case  1: return (&gotoblas_POWER6);
+	case  1: return OPENBLAS_CORE_POWER6;
 #endif
-	case  2: return (&gotoblas_POWER8);
+	case  2: return OPENBLAS_CORE_POWER8;
 #if ((!defined __GNUC__) || ( __GNUC__ >= 6)) || defined(__clang__)
-	case  3: return (&gotoblas_POWER9);
+	case  3: return OPENBLAS_CORE_POWER9;
 #endif
 #ifdef HAVE_P10_SUPPORT
-	case  4: return (&gotoblas_POWER10);
+	case  4: return OPENBLAS_CORE_POWER10;
 #endif
-	default: return NULL;
+	default: return -1;
 	}
 	snprintf(message, 128, "Core not found: %s\n", coretype);
 	openblas_warning(1, message);
@@ -327,33 +322,33 @@ void gotoblas_dynamic_init(void) {
 	char *p;
 
 
-	if (gotoblas) return;
+	if (openblas_core >= 0) return;
 
 	p = getenv("OPENBLAS_CORETYPE");
 	if ( p )
 	{
-		gotoblas = force_coretype(p);
+		openblas_core = force_coretype(p);
 	}
 	else
 	{
-		gotoblas = get_coretype();
+		openblas_core = get_coretype();
 	}
 
-	if (gotoblas == NULL)
+	if (openblas_core < 0)
 	{
 		snprintf(coremsg, 128, "Falling back to POWER8 core\n");
 		openblas_warning(1, coremsg);
-		gotoblas = &gotoblas_POWER8;
+		openblas_core = OPENBLAS_CORE_POWER8;
 	}
 
-	if (gotoblas && gotoblas -> init) {
+	if (openblas_core >= 0 && openblas_params_tab[openblas_core]->init) {
 		strncpy(coren,gotoblas_corename(),20);
 		sprintf(coremsg, "Core: %s\n",coren);
 		if (getenv("GET_OPENBLAS_CORETYPE")) {
 			fprintf(stderr, "%s", coremsg);
 		}
 		openblas_warning(2, coremsg);
-		gotoblas -> init();
+		openblas_params_tab[openblas_core]->init();
 	} else {
 		openblas_warning(0, "OpenBLAS : Architecture Initialization failed. No initialization function found.\n");
 		exit(1);
@@ -361,5 +356,5 @@ void gotoblas_dynamic_init(void) {
 }
 
 void gotoblas_dynamic_quit(void) {
-	gotoblas = NULL;
+	openblas_core = -1;
 }

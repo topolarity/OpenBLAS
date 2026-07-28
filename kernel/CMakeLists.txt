@@ -1532,7 +1532,9 @@ endif ()
     add_library(kernel${TSUFFIX} OBJECT ${OPENBLAS_SRC})
     set_target_properties(kernel${TSUFFIX} PROPERTIES COMPILE_FLAGS "${KERNEL_DEFINITIONS}")
     get_target_property(KERNEL_INCLUDE_DIRECTORIES kernel${TSUFFIX} INCLUDE_DIRECTORIES)
-    set_target_properties(kernel${TSUFFIX} PROPERTIES INCLUDE_DIRECTORIES "${KERNEL_INCLUDE_DIRECTORIES};${TARGET_CONF_DIR}")
+    # ${PROJECT_BINARY_DIR} is needed for the generated dyn_cores.h, which
+    # common_param.h includes; TARGET_CONF_DIR only carries config.h.
+    set_target_properties(kernel${TSUFFIX} PROPERTIES INCLUDE_DIRECTORIES "${KERNEL_INCLUDE_DIRECTORIES};${TARGET_CONF_DIR};${PROJECT_BINARY_DIR}")
     if (USE_GEMM3M)
       target_compile_definitions(kernel${TSUFFIX} PRIVATE USE_GEMM3M)
     endif()

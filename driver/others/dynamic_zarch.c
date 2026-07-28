@@ -1,14 +1,9 @@
 #include "common.h"
 #include "cpuid_zarch.h"
 #include <stdbool.h>
-
-
-extern gotoblas_t gotoblas_ZARCH_GENERIC;
 #ifdef DYN_Z13
-extern gotoblas_t gotoblas_Z13;
 #endif
 #ifdef DYN_Z14
-extern gotoblas_t gotoblas_Z14;
 #endif
 
 #define NUM_CORETYPES 4
@@ -18,12 +13,12 @@ extern void openblas_warning(int verbose, const char* msg);
 
 char* gotoblas_corename(void) {
 #ifdef DYN_Z13
-	if (gotoblas == &gotoblas_Z13)	return cpuname[CPU_Z13];
+	if (openblas_core == OPENBLAS_CORE_Z13)	return cpuname[CPU_Z13];
 #endif
 #ifdef DYN_Z14
-	if (gotoblas == &gotoblas_Z14)	return cpuname[CPU_Z14];
+	if (openblas_core == OPENBLAS_CORE_Z14)	return cpuname[CPU_Z14];
 #endif
-	if (gotoblas == &gotoblas_ZARCH_GENERIC) return cpuname[CPU_GENERIC];
+	if (openblas_core == OPENBLAS_CORE_ZARCH_GENERIC) return cpuname[CPU_GENERIC];
 
 	return "unknown";
 }
@@ -40,7 +35,7 @@ char* gotoblas_corename(void) {
  * Note that we cannot use vector registers on a z13 or newer unless supported
  * by the OS kernel (which needs to handle them properly during context switch).
  */
-static gotoblas_t* get_coretype(void) {
+static int get_coretype(void) {
 
 	int cpu = detect();
 
@@ -49,24 +44,24 @@ static gotoblas_t* get_coretype(void) {
 	// Vector-Enhancements Facility 1 (float SIMD instructions), if present.
 	case CPU_Z14:
 #ifdef DYN_Z14
-		return &gotoblas_Z14;
+		return OPENBLAS_CORE_Z14;
 #endif
 
 	// z13: Vector Facility (SIMD for double)
 	case CPU_Z13:
 #ifdef DYN_Z13
-		return &gotoblas_Z13;
+		return OPENBLAS_CORE_Z13;
 #endif
 
 	default:
 	// fallback in case of missing compiler support, systems before z13, or
 	// when the OS does not advertise support for the Vector Facility (e.g.,
 	// missing support in the OS kernel)
-		return &gotoblas_ZARCH_GENERIC;
+		return OPENBLAS_CORE_ZARCH_GENERIC;
 	}
 }
 
-static gotoblas_t* force_coretype(char* coretype) {
+static int force_coretype(char* coretype) {
 
 	int i;
 	int found = -1;
@@ -83,25 +78,25 @@ static gotoblas_t* force_coretype(char* coretype) {
 
 	if (found == CPU_Z13) {
 #ifdef DYN_Z13
-		return &gotoblas_Z13;
+		return OPENBLAS_CORE_Z13;
 #else
 		openblas_warning(1, "Z13 support not compiled in");
-		return NULL;
+		return -1;
 #endif
 	} else if (found == CPU_Z14) {
 #ifdef DYN_Z14
-		return &gotoblas_Z14;
+		return OPENBLAS_CORE_Z14;
 #else
 		openblas_warning(1, "Z14 support not compiled in");
-		return NULL;
+		return -1;
 #endif
 	} else if (found == CPU_GENERIC) {
-		return &gotoblas_ZARCH_GENERIC;
+		return OPENBLAS_CORE_ZARCH_GENERIC;
 	}
 
 	snprintf(message, 128, "Core not found: %s\n", coretype);
 	openblas_warning(1, message);
-	return NULL;
+	return -1;
 }
 
 void gotoblas_dynamic_init(void) {
@@ -111,16 +106,16 @@ void gotoblas_dynamic_init(void) {
 	char* p;
 
 
-	if (gotoblas) return;
+	if (openblas_core >= 0) return;
 
 	p = getenv("OPENBLAS_CORETYPE");
 	if (p)
 	{
-		gotoblas = force_coretype(p);
+		openblas_core = force_coretype(p);
 	}
 	else
 	{
-		gotoblas = get_coretype();
+		openblas_core = get_coretype();
 		if (openblas_verbose() >= 2) {
 			snprintf(coremsg, sizeof(coremsg), "Choosing kernels based on getauxval(AT_HWCAP)=0x%lx\n",
 				 getauxval(AT_HWCAP));
@@ -128,20 +123,20 @@ void gotoblas_dynamic_init(void) {
 		}
 	}
 
-	if (gotoblas == NULL)
+	if (openblas_core < 0)
 	{
 		snprintf(coremsg, 128, "Failed to detect system, falling back to generic z support.\n");
 		openblas_warning(1, coremsg);
-		gotoblas = &gotoblas_ZARCH_GENERIC;
+		openblas_core = OPENBLAS_CORE_ZARCH_GENERIC;
 	}
 
-	if (gotoblas && gotoblas->init) {
+	if (openblas_core >= 0 && openblas_params_tab[openblas_core]->init) {
 		if (openblas_verbose() >= 2) {
 			strncpy(coren, gotoblas_corename(), 20);
 			sprintf(coremsg, "Core: %s\n", coren);
 			openblas_warning(2, coremsg);
 		}
-		gotoblas->init();
+		openblas_params_tab[openblas_core]->init();
 	}
 	else {
 		openblas_warning(0, "OpenBLAS : Architecture Initialization failed. No initialization function found.\n");
@@ -150,5 +145,5 @@ void gotoblas_dynamic_init(void) {
 }
 
 void gotoblas_dynamic_quit(void) {
-	gotoblas = NULL;
+	openblas_core = -1;
 }

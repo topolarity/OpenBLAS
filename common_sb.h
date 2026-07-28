@@ -27,33 +27,34 @@
 #define SBGEMM_SMALL_MATRIX_PERMIT	sbgemm_small_matrix_permit
 #else
 
-#define SBDOT_K             gotoblas -> sbdot_k
-#define SBSTOBF16_K         gotoblas -> sbstobf16_k
-#define SBDTOBF16_K         gotoblas -> sbdtobf16_k
-#define SBF16TOS_K          gotoblas -> sbf16tos_k
-#define DBF16TOD_K          gotoblas -> dbf16tod_k
-#define SBGEMV_N_K          gotoblas -> sbgemv_n
-#define SBGEMV_T_K          gotoblas -> sbgemv_t
+#define SBDOT_K             openblas_sbdot_dispatch[openblas_core]->sbdot_k
+#define SBSTOBF16_K         openblas_sbstobf16_dispatch[openblas_core]->sbstobf16_k
+#define SBDTOBF16_K         openblas_sbdtobf16_dispatch[openblas_core]->sbdtobf16_k
+#define SBF16TOS_K          openblas_sbf16tos_dispatch[openblas_core]->sbf16tos_k
+#define DBF16TOD_K          openblas_dbf16tod_dispatch[openblas_core]->dbf16tod_k
+#define SBGEMV_N_K          openblas_sbgemv_dispatch[openblas_core]->sbgemv_n
+#define SBGEMV_T_K          openblas_sbgemv_dispatch[openblas_core]->sbgemv_t
 
-#define	SBGEMM_ONCOPY		gotoblas -> sbgemm_oncopy
-#define	SBGEMM_OTCOPY		gotoblas -> sbgemm_otcopy
-#define	SBGEMM_INCOPY		gotoblas -> sbgemm_incopy
-#define	SBGEMM_ITCOPY		gotoblas -> sbgemm_itcopy
-#define	SBGEMM_BETA		gotoblas -> sbgemm_beta
-#define	SBGEMM_KERNEL		gotoblas -> sbgemm_kernel
+#define	SBGEMM_ONCOPY		openblas_sbgemm_dispatch[openblas_core]->sbgemm_oncopy
+#define	SBGEMM_OTCOPY		openblas_sbgemm_dispatch[openblas_core]->sbgemm_otcopy
+#define	SBGEMM_INCOPY		openblas_sbgemm_dispatch[openblas_core]->sbgemm_incopy
+#define	SBGEMM_ITCOPY		openblas_sbgemm_dispatch[openblas_core]->sbgemm_itcopy
+#define	SBGEMM_BETA		openblas_sbgemm_dispatch[openblas_core]->sbgemm_beta
+#define	SBGEMM_KERNEL		openblas_sbgemm_dispatch[openblas_core]->sbgemm_kernel
 
-#define SBGEMM_SMALL_MATRIX_PERMIT	gotoblas -> sbgemm_small_matrix_permit
+#define SBGEMM_SMALL_MATRIX_PERMIT	openblas_sbgemm_dispatch[openblas_core]->sbgemm_small_matrix_permit
 #endif
 
-#define SBGEMM_SMALL_KERNEL_NN		FUNC_OFFSET(sbgemm_small_kernel_nn)
-#define SBGEMM_SMALL_KERNEL_NT		FUNC_OFFSET(sbgemm_small_kernel_nt)
-#define SBGEMM_SMALL_KERNEL_TN		FUNC_OFFSET(sbgemm_small_kernel_tn)
-#define SBGEMM_SMALL_KERNEL_TT		FUNC_OFFSET(sbgemm_small_kernel_tt)
+#define	SBGEMM_SMALL_KERNEL_BASE	OB_SLOT_BASE(sbgemm)
+#define SBGEMM_SMALL_KERNEL_NN		OB_SLOT_OFFSET(sbgemm, sbgemm_small_kernel_nn)
+#define SBGEMM_SMALL_KERNEL_NT		OB_SLOT_OFFSET(sbgemm, sbgemm_small_kernel_nt)
+#define SBGEMM_SMALL_KERNEL_TN		OB_SLOT_OFFSET(sbgemm, sbgemm_small_kernel_tn)
+#define SBGEMM_SMALL_KERNEL_TT		OB_SLOT_OFFSET(sbgemm, sbgemm_small_kernel_tt)
 
-#define SBGEMM_SMALL_KERNEL_B0_NN	FUNC_OFFSET(sbgemm_small_kernel_b0_nn)
-#define SBGEMM_SMALL_KERNEL_B0_NT	FUNC_OFFSET(sbgemm_small_kernel_b0_nt)
-#define SBGEMM_SMALL_KERNEL_B0_TN	FUNC_OFFSET(sbgemm_small_kernel_b0_tn)
-#define SBGEMM_SMALL_KERNEL_B0_TT	FUNC_OFFSET(sbgemm_small_kernel_b0_tt)
+#define SBGEMM_SMALL_KERNEL_B0_NN	OB_SLOT_OFFSET(sbgemm, sbgemm_small_kernel_b0_nn)
+#define SBGEMM_SMALL_KERNEL_B0_NT	OB_SLOT_OFFSET(sbgemm, sbgemm_small_kernel_b0_nt)
+#define SBGEMM_SMALL_KERNEL_B0_TN	OB_SLOT_OFFSET(sbgemm, sbgemm_small_kernel_b0_tn)
+#define SBGEMM_SMALL_KERNEL_B0_TT	OB_SLOT_OFFSET(sbgemm, sbgemm_small_kernel_b0_tt)
 
 #define	SBGEMM_NN		sbgemm_nn
 #define	SBGEMM_CN		sbgemm_tn

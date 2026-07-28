@@ -15,6 +15,7 @@ endif
 # COMMONOBJS	+=  info.$(SUFFIX)
 
 ifeq ($(DYNAMIC_ARCH), 1)
+COMMONOBJS	+=  dispatch.$(SUFFIX)
 ifeq ($(ARCH),arm64)
 COMMONOBJS	+=  dynamic_arm64.$(SUFFIX)
 else

@@ -51,21 +51,21 @@
 
 #else // #DYNAMIC_ARCH
 
-#define SHGEMM_ONCOPY		gotoblas -> shgemm_oncopy
-#define SHGEMM_OTCOPY		gotoblas -> shgemm_otcopy
+#define SHGEMM_ONCOPY		openblas_shgemm_dispatch[openblas_core]->shgemm_oncopy
+#define SHGEMM_OTCOPY		openblas_shgemm_dispatch[openblas_core]->shgemm_otcopy
 #if SGEMM_DEFAULT_UNROLL_M == SGEMM_DEFAULT_UNROLL_N
-#define SHGEMM_INCOPY		gotoblas -> shgemm_oncopy
-#define SHGEMM_ITCOPY		gotoblas -> shgemm_otcopy
+#define SHGEMM_INCOPY		openblas_shgemm_dispatch[openblas_core]->shgemm_oncopy
+#define SHGEMM_ITCOPY		openblas_shgemm_dispatch[openblas_core]->shgemm_otcopy
 #else
-#define SHGEMM_INCOPY		gotoblas -> shgemm_incopy
-#define SHGEMM_ITCOPY		gotoblas -> shgemm_itcopy
+#define SHGEMM_INCOPY		openblas_shgemm_dispatch[openblas_core]->shgemm_incopy
+#define SHGEMM_ITCOPY		openblas_shgemm_dispatch[openblas_core]->shgemm_itcopy
 #endif
 
-#define SHGEMM_BETA		gotoblas -> shgemm_beta
-#define SHGEMM_KERNEL		gotoblas -> shgemm_kernel
+#define SHGEMM_BETA		openblas_shgemm_dispatch[openblas_core]->shgemm_beta
+#define SHGEMM_KERNEL		openblas_shgemm_dispatch[openblas_core]->shgemm_kernel
 
-#define SHGEMV_N_K      gotoblas->shgemv_n
-#define SHGEMV_T_K      gotoblas->shgemv_t
+#define SHGEMV_N_K      openblas_shgemv_dispatch[openblas_core]->shgemv_n
+#define SHGEMV_T_K      openblas_shgemv_dispatch[openblas_core]->shgemv_t
 
 #endif // #DYNAMIC_ARCH
 

@@ -119,3 +119,4 @@ CMakeCache.txt
 CMakeFiles/*
 .vscode
 **/__pycache__
+dyn_cores.h
