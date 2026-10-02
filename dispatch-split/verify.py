@@ -190,14 +190,23 @@ def main():
                            if not n.endswith(" ok") or b != n))
 
         # 6. Static links keep only what they call.
+        linked = {}
         for k in ("base", "new"):
             size = run_tool("measure-size.sh", dirs[k])
             print(f"static link sizes, {k}:\n{size.stdout}{size.stderr}", flush=True)
-        size = run_tool("measure-size.sh", dirs["new"])
-        runtime = re.search(r"^runtime\s+\d+\s+(\d+)$", size.stdout, re.M)
-        report("a program calling no BLAS links no per-core functions",
-               bool(runtime) and runtime.group(1) == "0",
-               f"{runtime.group(1) if runtime else '?'} linked")
+            runtime = re.search(r"^runtime\s+\d+\s+(\d+)$", size.stdout, re.M)
+            linked[k] = int(runtime.group(1)) if runtime else None
+        if sys.platform == "darwin":
+            # ld64 never dead-strips an object without .subsections_via_symbols,
+            # which is every assembly kernel: setparam_<CORE>.o pulls them out
+            # of the archive and they stay.  Only the C kernels can go.
+            report("a program calling no BLAS links fewer per-core functions than the base",
+                   None not in linked.values() and linked["new"] < linked["base"],
+                   f"{linked['new']} linked (base: {linked['base']}); "
+                   "the rest are assembly kernels, which ld64 cannot strip")
+        else:
+            report("a program calling no BLAS links no per-core functions",
+                   linked["new"] == 0, f"{'?' if linked['new'] is None else linked['new']} linked")
 
         if a.lapack:
             with open(os.path.join(dirs["new"], "lapack.log"), "w") as log:

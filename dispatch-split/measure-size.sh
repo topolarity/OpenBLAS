@@ -20,6 +20,16 @@ LDLIBS=${LDLIBS:--lgfortran -lpthread -lm}
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 
+# Mach-O: ld64 spells --gc-sections -dead_strip, C symbols carry a leading
+# "_", and size has no -A.
+if [ "$(uname -s)" = Darwin ]; then
+  gc=-Wl,-dead_strip us=_
+  text_size() { size -m "$1" | awk '$1 == "Section" && $2 == "__text:" {print $3; exit}'; }
+else
+  gc=-Wl,--gc-sections us=
+  text_size() { size -A "$1" | awk '$1 == ".text" {print $2}'; }
+fi
+
 cat > "$work/runtime.c" <<'EOF'
 extern int openblas_get_num_threads(void);
 int main(void) { return openblas_get_num_threads() < 1; }
@@ -48,7 +58,7 @@ int main(void) {
 EOF
 
 # Every double-precision CBLAS routine, by address.
-nm -g --defined-only "$build"/libopenblas.a 2>/dev/null | awk '$3 ~ /^cblas_d[a-z0-9_]*$/ {print $3}' | sort -u > "$work/syms"
+nm -g --defined-only "$build"/libopenblas.a 2>/dev/null | awk -v us="$us" '$3 ~ "^" us "cblas_d[a-z0-9_]*$" {print substr($3, length(us) + 1)}' | sort -u > "$work/syms"
 {
   echo '#include <stdio.h>'
   sed 's/.*/extern void &(void);/' "$work/syms"
@@ -67,9 +77,9 @@ cores=$(ls "$build"/kernel/setparam_*.o | sed 's/.*setparam_\(.*\)\.o$/\1/' | pa
 printf '%-8s %14s %20s\n' program "text bytes" "per-core functions"
 for p in runtime dgemm solver alld; do
   # shellcheck disable=SC2086
-  $CC -O2 -I"$build" "$work/$p.c" -o "$work/$p" -Wl,--gc-sections "$build"/libopenblas.a $LDLIBS
+  $CC -O2 -I"$build" "$work/$p.c" -o "$work/$p" $gc "$build"/libopenblas.a $LDLIBS
   "$work/$p" > /dev/null
-  text=$(size -A "$work/$p" | awk '$1 == ".text" {print $2}')
-  per_core=$(nm "$work/$p" | awk -v cores="$cores" '$2 ~ /^[tT]$/ && $3 ~ "_(" cores ")$"' | wc -l)
+  text=$(text_size "$work/$p")
+  per_core=$(nm "$work/$p" | awk -v cores="$cores" '$2 ~ /^[tT]$/ && $3 ~ "_(" cores ")$"' | wc -l | tr -d ' ')
   printf '%-8s %14s %20s\n' "$p" "$text" "$per_core"
 done
