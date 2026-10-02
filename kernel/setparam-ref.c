@@ -454,7 +454,7 @@ gotoblas_t TABLE_NAME = {
 
 #endif
 
-#if (BUILD_COMPLEX)
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   0, 0, 0,
   CGEMM_DEFAULT_UNROLL_M, CGEMM_DEFAULT_UNROLL_N,
 #ifdef CGEMM_DEFAULT_UNROLL_MN
@@ -462,23 +462,12 @@ gotoblas_t TABLE_NAME = {
 #else
  MAX(CGEMM_DEFAULT_UNROLL_M, CGEMM_DEFAULT_UNROLL_N),
 #endif
-#if (BUILD_COMPLEX)
   camax_kTS, camin_kTS,
-#endif
-#if (BUILD_COMPLEX)
   icamax_kTS,
-#endif
-#if (BUILD_COMPLEX)
   icamin_kTS,
   cnrm2_kTS, casum_kTS, csum_kTS,
-#endif
-#if (BUILD_COMPLEX)
   ccopy_kTS, cdotu_kTS, cdotc_kTS,
-#endif
-#if (BUILD_COMPLEX)
  csrot_kTS,
-#endif
-#if (BUILD_COMPLEX)
   caxpy_kTS,
   caxpyc_kTS,
   cscal_kTS,
@@ -491,8 +480,6 @@ gotoblas_t TABLE_NAME = {
   cgeru_kTS, cgerc_kTS, cgerv_kTS, cgerd_kTS,
   csymv_LTS, csymv_UTS,
   chemv_LTS, chemv_UTS, chemv_MTS, chemv_VTS,
-#endif
-#if (BUILD_COMPLEX)
 #ifdef ARCH_ARM64
 #ifdef HAVE_SME
   sme_cgemm_kernelTS,
@@ -500,6 +487,8 @@ gotoblas_t TABLE_NAME = {
   NULL,
 #endif
 #endif
+#endif
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   cgemm_kernel_nTS, cgemm_kernel_lTS, cgemm_kernel_rTS, cgemm_kernel_bTS,
   cgemm_betaTS,
   csymm_kernel_nTS, csymm_kernel_lTS, csymm_kernel_rTS, csymm_kernel_bTS,
@@ -536,12 +525,13 @@ gotoblas_t TABLE_NAME = {
   ctrsm_ounucopyTS,  ctrsm_ounncopyTS,  ctrsm_outucopyTS,  ctrsm_outncopyTS,
   ctrsm_olnucopyTS,  ctrsm_olnncopyTS,  ctrsm_oltucopyTS,  ctrsm_oltncopyTS,
 #endif
-#endif
-#if (BUILD_COMPLEX)
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
 
   ctrmm_kernel_RNTS,  ctrmm_kernel_RTTS,  ctrmm_kernel_RRTS,  ctrmm_kernel_RCTS,
   ctrmm_kernel_LNTS,  ctrmm_kernel_LTTS,  ctrmm_kernel_LRTS,  ctrmm_kernel_LCTS,
 
+#endif
+#if (BUILD_COMPLEX)
 #if CGEMM_DEFAULT_UNROLL_M != CGEMM_DEFAULT_UNROLL_N
   ctrmm_iunucopyTS,  ctrmm_iunncopyTS,  ctrmm_iutucopyTS,  ctrmm_iutncopyTS,
   ctrmm_ilnucopyTS,  ctrmm_ilnncopyTS,  ctrmm_iltucopyTS,  ctrmm_iltncopyTS,
@@ -629,7 +619,7 @@ gotoblas_t TABLE_NAME = {
 #endif
 #endif
 
-#if (BUILD_COMPLEX)
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
 #ifndef NO_LAPACK
   cneg_tcopyTS,
 
@@ -936,7 +926,7 @@ gotoblas_t TABLE_NAME = {
 #if BUILD_DOUBLE  == 1
   daxpby_kTS,
 #endif
-#if BUILD_COMPLEX == 1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   caxpby_kTS,
 #endif
 #if BUILD_COMPLEX16== 1
@@ -999,7 +989,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE == 1 || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16==1
@@ -1016,7 +1006,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE== 1 || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_q = DGEMM_DEFAULT_Q;
 #endif
-#if BUILD_COMPLEX== 1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_q = CGEMM_DEFAULT_Q;
 #endif
 #if BUILD_COMPLEX16==1
@@ -1033,7 +1023,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE==1  || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_r = DGEMM_DEFAULT_R;
 #endif
-#if BUILD_COMPLEX==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_r = CGEMM_DEFAULT_R;
 #endif
 #if BUILD_COMPLEX16==1
@@ -1580,7 +1570,7 @@ static void init_parameter(void) {
 #if  (BUILD_DOUBLE==1) || (BUILD_COMPLEX16)
   TABLE_NAME.dgemm_q = DGEMM_DEFAULT_Q;
 #endif
-#if BUILD_COMPLEX == 1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_q = CGEMM_DEFAULT_Q;
 #endif
 #if BUILD_COMPLEX16==1
@@ -1621,7 +1611,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE == 1 || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p =  32 * (l2 >> 7);
 #endif
-#if BUILD_COMPLEX==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p =  32 * (l2 >> 7);
 #endif
 #if BUILD_COMPLEX16==1
@@ -1645,7 +1635,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE == 1 || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p =  48 * (l2 >> 7);
 #endif
-#if BUILD_COMPLEX==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p =  48 * (l2 >> 7);
 #endif
 #if BUILD_COMPLEX16==1
@@ -1669,7 +1659,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE ==1 || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = 128;
 #endif
-#if BUILD_COMPLEX==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = 128;
 #endif
 #if BUILD_COMPLEX16==1
@@ -1693,7 +1683,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE ==1  || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p =  28 * (l2 >> 7);
 #endif
-#if BUILD_COMPLEX==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p =  28 * (l2 >> 7);
 #endif
 #if BUILD_COMPLEX16 == 1
@@ -1717,7 +1707,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE==1 || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p =  46 * (l2 >> 9) + 8;
 #endif
-#if BUILD_COMPLEX==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p =  46 * (l2 >> 9) + 4;
 #endif
 #if BUILD_COMPLEX16==1
@@ -1741,7 +1731,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE == 1 || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p =  42 * (l2 >> 9) + 8;
 #endif
-#if BUILD_COMPLEX==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p =  21 * (l2 >> 9) + 4;
 #endif
 #if BUILD_COMPLEX16==1
@@ -1765,7 +1755,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE ==1 || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p =  42 * (l2 >> 9) + 8;
 #endif
-#if BUILD_COMPLEX==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p =  21 * (l2 >> 9) + 4;
 #endif
 #if BUILD_COMPLEX16==1
@@ -1790,7 +1780,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -1814,7 +1804,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -1838,7 +1828,7 @@ static void init_parameter(void) {
 #if (BUILD_DOUBLE==1) || (BUILD_COMPLEX16)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -1862,7 +1852,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -1887,7 +1877,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = 112 +  28 * (l2 >> 7);
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = 112 +  28 * (l2 >> 7);
 #endif
 #if BUILD_COMPLEX16
@@ -1911,7 +1901,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -1935,7 +1925,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -1959,7 +1949,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -1983,7 +1973,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -2008,7 +1998,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -2032,7 +2022,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -2056,7 +2046,7 @@ static void init_parameter(void) {
 #if (BUILD_DOUBLE==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if BUILD_COMPLEX
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if BUILD_COMPLEX16
@@ -2081,7 +2071,7 @@ static void init_parameter(void) {
 #if  (BUILD_DOUBLE==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.dgemm_p = DGEMM_DEFAULT_P;
 #endif
-#if (BUILD_COMPLEX==1)
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = CGEMM_DEFAULT_P;
 #endif
 #if (BUILD_COMPLEX16==1)
@@ -2145,7 +2135,7 @@ static void init_parameter(void) {
             TABLE_NAME.dgemm_p = 512;
             TABLE_NAME.dgemm_q = 512;
 #endif
-#if BUILD_COMPLEX == 1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
             TABLE_NAME.cgemm_p = 160;
             TABLE_NAME.cgemm_q = 480;
 #endif
@@ -2165,7 +2155,7 @@ static void init_parameter(void) {
 #if BUILD_DOUBLE== 1
   TABLE_NAME.dgemm_p = ((TABLE_NAME.dgemm_p + DGEMM_DEFAULT_UNROLL_M - 1)/DGEMM_DEFAULT_UNROLL_M) * DGEMM_DEFAULT_UNROLL_M;
 #endif
-#if BUILD_COMPLEX==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_p = ((TABLE_NAME.cgemm_p + CGEMM_DEFAULT_UNROLL_M - 1)/CGEMM_DEFAULT_UNROLL_M) * CGEMM_DEFAULT_UNROLL_M;
 #endif
 #if BUILD_COMPLEX16==1
@@ -2237,7 +2227,7 @@ static void init_parameter(void) {
 			       ) / (TABLE_NAME.qgemm_q * 16) - 15) & ~15);
 #endif
 
-#if BUILD_COMPLEX ==1
+#if (BUILD_COMPLEX==1) || (BUILD_COMPLEX16==1)
   TABLE_NAME.cgemm_r = (((BUFFER_SIZE -
 			       ((TABLE_NAME.cgemm_p * TABLE_NAME.cgemm_q *  8 + TABLE_NAME.offsetA
 				 + TABLE_NAME.align) & ~TABLE_NAME.align)
