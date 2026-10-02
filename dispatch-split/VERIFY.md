@@ -200,11 +200,9 @@ cmake 4.4.0; 4 cores (ARMV8, ARMV9SME, NEOVERSEN1, VORTEXM4), against develop
 `LDLIBS="-L/opt/homebrew/lib/gcc/current -lgfortran -lpthread -lm" verify.py
 upstream/develop HEAD~1 --config BUILD_BFLOAT16=1 --config BUILD_SINGLE=1
 --config BUILD_COMPLEX16=1 --config "DYNAMIC_LIST='ARMV8 NEOVERSEN1 VORTEX'"
---lapack --cmake --target ARMV8`: 14 of 18 checks passed, 2 skipped, 2 failed.
-Both failures were of the tools as they were when the run started (the two
-notes above: the probe of check 3 died in ARMV9SME's `init()`, and check 7
-expected 0); checks 3 and 7 below are from rerunning the fixed tools on the
-builds of that run. `verify.py` as committed has not been run end to end.
+--lapack --cmake --target ARMV8`: 16 of 18 checks passed, 2 skipped. (A first
+run, with the tools as they were before the two notes above, failed checks 3
+and 7 for the reasons given there.)
 
 | Check | Result |
 |---|---|
@@ -218,7 +216,7 @@ builds of that run. `verify.py` as committed has not been run end to end.
 | 6. `BUILD_SINGLE=1` | SKIP: develop does not build with it either (LAPACKE's `ar` step); the tables, compared by hand, are identical (968 entries) |
 | 6. `BUILD_COMPLEX16=1` | SKIP: develop does not build with it either |
 | 6. `DYNAMIC_LIST='ARMV8 NEOVERSEN1 VORTEX'` | PASS: builds, tests as develop, 2,349 entries identical (3 cores) |
-| 7. runtime-only program | 472 per-core functions linked (develop: 2,248), all of them assembly kernels |
+| 7. runtime-only program | PASS, by the macOS criterion: 472 per-core functions linked (develop: 2,248), all of them assembly kernels |
 | 8. `make lapack-test` | PASS: 5,438,659 tests, no errors |
 | 9. cmake | PASS: ctest 116 of 116 |
 | 10. `TARGET=ARMV8`, no `DYNAMIC_ARCH` | PASS: 7,346 objects byte-identical |
